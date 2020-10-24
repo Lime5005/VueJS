@@ -30,6 +30,12 @@ Vue.createApp({
             } else {
                 return this.goalB;
             }
+        },
+        add(num) {
+            return this.counter += num;
+        },
+        reduce(num) {
+            return this.counter -= num;
         }
     }
 }).mount('#app');

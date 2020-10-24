@@ -14,6 +14,10 @@ const app = Vue.createApp({
         showFavNumber() {
             const num = Math.random();
             return num;
+        },
+        //页面同步显示输入信息：
+        setName(e) {
+            this.name = e.target.value;
         }
     }
 });

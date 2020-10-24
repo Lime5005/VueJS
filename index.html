@@ -22,8 +22,8 @@
             <p>Learn More about <a v-bind:href="vueLink">Vue</a></p>
             <p>{{ showRandomWords() }}</p>
             <br><br>
-            <button v-on:click="counter++">Add</button>
-            <button v-on:click="counter--">Reduce</button>
+            <button v-on:click="add(20)">Add 20</button>
+            <button v-on:click="reduce(10)">Reduce 10</button>
             <p>Result: {{ counter }}</p>
 
             <!--此方法因网络安全隐患不推荐使用-->
