@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue JS Learning</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <label for="goal">My Goal</label>
+            <input type="text" v-model="inputValue">
+            <button v-on:click="addGoal">Add goal</button>
+        </div>
+        <div>
+            <ul>
+                <li v-for="goal in goals">{{ goal }}</li>
+
+            </ul>
+            <p>Learn More about <a v-bind:href="vueLink">Vue</a></p>
+            <p>{{ showRandomWords() }}</p>
+            <br><br>
+            <button v-on:click="counter++">Add</button>
+            <button v-on:click="counter--">Reduce</button>
+            <p>Result: {{ counter }}</p>
+
+            <!--此方法因网络安全隐患不推荐使用-->
+            <!--<p v-html="showMyGoal()"></p>-->
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
