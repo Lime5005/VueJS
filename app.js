@@ -6,7 +6,8 @@ Vue.createApp({
             vueLink: 'https://vuejs.org/',
             goalA: '<h2>Hello there</h2>',
             goalB: '<h3>My Goal B</h3>',
-            counter: 0
+            counter: 0,
+            inputWords: ''
         };
     },
     methods: {
@@ -36,6 +37,15 @@ Vue.createApp({
         },
         reduce(num) {
             return this.counter -= num;
+        },
+        submitForm(e) {
+            alert('Submitted!!!');
+        },
+        sayHello() {
+            console.log('Hello');
+        },
+        showInputWords(e) {
+            this.inputWords = e.target.value;
         }
     }
 }).mount('#app');

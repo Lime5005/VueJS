@@ -11,7 +11,8 @@
     <div id="app">
         <div>
             <label for="goal">My Goal</label>
-            <input type="text" v-model="inputValue">
+            <!--event modifier: keyup.enter/shift/page-down etc.限制更多；在用户互动时更加细节化 The function is ONLY trigered when you press enter-->
+            <input type="text" v-model="inputValue" v-on:keyup.enter="sayHello">
             <button v-on:click="addGoal">Add goal</button>
         </div>
         <div>
@@ -24,10 +25,19 @@
             <br><br>
             <button v-on:click="add(20)">Add 20</button>
             <button v-on:click="reduce(10)">Reduce 10</button>
+            <!--固定某个变量, v-once-->
+            <p v-once>Initial number: {{ counter }}</p>
             <p>Result: {{ counter }}</p>
 
             <!--此方法因网络安全隐患不推荐使用-->
             <!--<p v-html="showMyGoal()"></p>-->
+
+            <!--避免下一个event引起整个页面重刷, 而导致之前的输入数据丢失, e.preventDefault()-->
+            <form v-on:submit.prevent="submitForm">
+                <input type="text" v-on:input="showInputWords">
+                <button>Sign up</button>
+                <p>{{ inputWords }}</p>
+            </form>
         </div>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
