@@ -10,6 +10,9 @@ Vue.createApp({
             inputWords: ''
         };
     },
+    computed: {
+
+    },
     methods: {
         addGoal() {
             this.goals.push(this.inputValue);

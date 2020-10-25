@@ -9,8 +9,10 @@
 
 <body>
     <section id="app">
-        <input type="text" v-on:input="setName" placeholder="put your name">
-        <h2>Name: {{ name }}</h2>
+        <!-- v-model = v-bind:value + v-on:input, listening and writing 绑定输入的同时也输出-->
+        <input type="text" v-model="name" placeholder="put your name">
+        <button v-on:click="resetName">Reset Name</button>
+        <h2>Full Name: {{ fullName }}</h2>
         <p>Age: {{ age }}</p>
         <p>{{ showFutureAge()}} years old in 5 years</p>
         <p>Favorite Number: {{ showFavNumber() }}</p>
