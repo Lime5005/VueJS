@@ -54,6 +54,11 @@
                         heals himself for
                         <span class="log--heal">
                          {{ msg.attackValue}}</span></span>
+                    <span v-else-if="msg.whatAttack === 'special-attack'">
+                        gives a special attack and deals
+                        <span class="log--special">
+                            {{ msg.attackValue}}</span>
+                    </span>
                     <span v-else>
                         attacks and deals <span class="log--damage"> {{ msg.attackValue}}</span></span>
                 </li>

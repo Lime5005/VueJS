@@ -130,3 +130,7 @@ button:disabled {
 .log--heal {
     color: green;
 }
+
+.log--special {
+    color: lime;
+}
