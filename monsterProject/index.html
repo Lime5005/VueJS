@@ -28,16 +28,36 @@
                 <div class="healthbar__value" :style="playerHealthbarStyle"></div>
             </div>
         </section>
-        <section id="controls">
+        <section class="container" v-if="winner">
+            <h2>Game over!</h2>
+            <h3 v-if="winner === 'player'">You win!</h3>
+            <h3 v-else-if="winner === 'monster'">You lost!</h3>
+            <h3 v-else="winner === 'draw'">It's a draw...</h3>
+            <button id="newGame" @click="startAgain">Start Again</button>
+        </section>
+        <section id="controls" v-else>
+            <!--or v-if="!winner" 只有游戏进行中，没有出现winner时才会显示-->
             <button @click="attackMonster">ATTACK</button>
             <!--这个按钮被disable的同时，里面的公式也同时失效-->
             <button :disabled="specialAttackControl" @click="specialAttack">SPECIAL ATTACK</button>
             <button @click="recoverHealth">HEAL</button>
-            <button>SURRENDER</button>
+            <button @click="surrender">SURRENDER</button>
         </section>
         <section id="log" class="container">
             <h2>Battle Log</h2>
-            <ul></ul>
+            <ul>
+                <li v-for="msg in messageList">
+                    <!--add the class if the condition is true-->
+                    <span :class="{'log--player': msg.attackFrom === 'player', 'log--monster': msg.attackFrom === 'monster'}">{{ msg.attackFrom === 'player' ? 'Player' : 'Monster'}} </span>
+
+                    <span v-if="msg.whatAttack === 'recover'">
+                        heals himself for
+                        <span class="log--heal">
+                         {{ msg.attackValue}}</span></span>
+                    <span v-else>
+                        attacks and deals <span class="log--damage"> {{ msg.attackValue}}</span></span>
+                </li>
+            </ul>
         </section>
     </div>
 </body>
