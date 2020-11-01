@@ -2,8 +2,9 @@
 <section>
   <header><h1>My Friends</h1></header>
   <!--这里把信息传递给子方，通过命名的暗号，父方用kebab-case，子方用camelCase-->
-  <friend-contact name="Lily" phone-number="111" email-address="lily@localhost.com" is-favorite="1"></friend-contact>
-  <friend-contact name="David" phone-number="333" email-address="david@localhost.com" is-favorite="0"></friend-contact>
+  <!--use v-bind to be more dynamic-->
+  <friend-contact v-for="friend in friends" :key="friend.id" :name="friend.name" :phone-number="friend.phone" :email-address="friend.email" :is-favorite="true"></friend-contact>
+
 </section>
 </template>
 
@@ -12,6 +13,19 @@ export default {
   data() {
     return {
       friends: [
+        { 
+          id: '1',
+          name: 'lily',
+          phone: '222',
+          email: 'lily@localhost.com'
+        },
+        { 
+          id: '2',
+          name: 'David',
+          phone: '111',
+          email: 'david@localhost.com'
+        },
+
       ]
     }
   }

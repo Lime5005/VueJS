@@ -1,6 +1,6 @@
 <template>
   <li>
-    <h2>{{ name }} {{ friendIsFavorite === "1" ? 'Favorite' : ''}}</h2>
+    <h2>{{ name }} {{ friendIsFavorite ? 'Favorite' : ''}}</h2>
     <button @click="toggleDetail">{{ showDetail ? 'Hide' : 'Show'}}</button>
     <button @click="toggleFavorite">Favorite?</button>
     <ul v-if="showDetail">
@@ -12,22 +12,40 @@
 <script>
 export default {
   // What defined in props are like data, can be accessed everywhere in this file. We use props to pass data from parent to child. Remember: props can not be mutated in the child, but you can bypass this role by passing it into data property (of cause, change to another name first)
-  props: [
+  /*props: [
     'name',
     'phoneNumber',
     'emailAddress',
     'isFavorite',
-  ],
+  ],*/
+  // More complex props: 适用于多人开发的大型项目
+  // Props can be used as normal HTML elements to bind with other functions
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    phoneNumber: {
+      type: String,
+      required: true
+    },
+    emailAddress: {
+      type: String,
+      required: true
+    },
+    isFavorite: {
+      type: Boolean,
+      required: false,
+      default: false,
+      /*validator: function(value) {
+        // Return either this or that, no other result will be accepted. // String: "1" or "0", Boolean: true or false
+        return value === '1' || value === '0'
+      }*/
+    }
+  },
   data() {
     return {
       showDetail: false,
-      friend: 
-        {
-          id: '1',
-          name: 'lily',
-          phone: '222',
-          email: 'lily@localhost.com'
-        },
       friendIsFavorite: this.isFavorite, 
     }
   },
@@ -36,11 +54,7 @@ export default {
         this.showDetail = !this.showDetail;
       },
       toggleFavorite() {
-        if (this.friendIsFavorite === '1') {
-          this.friendIsFavorite  = '0'
-        } else {
-          this.friendIsFavorite = '1'
-        }
+        this.friendIsFavorite = !this.friendIsFavorite;
       }
   }
 }
