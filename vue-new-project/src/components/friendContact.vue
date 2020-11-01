@@ -1,8 +1,8 @@
 <template>
   <li>
-    <h2>{{ name }} {{ friendIsFavorite ? 'Favorite' : ''}}</h2>
+    <h2>{{ name }} {{ isFavorite ? 'Yes' : 'No' }}</h2>
     <button @click="toggleDetail">{{ showDetail ? 'Hide' : 'Show'}}</button>
-    <button @click="toggleFavorite">Favorite?</button>
+    <button @click="toggleFavorite">Toggle Favorite</button>
     <ul v-if="showDetail">
       <li><strong>Phone: </strong>{{ phoneNumber }}</li>
       <li><strong>Email: </strong>{{ emailAddress }}</li>
@@ -21,6 +21,10 @@ export default {
   // More complex props: 适用于多人开发的大型项目
   // Props can be used as normal HTML elements to bind with other functions
   props: {
+    id: {
+      type: String,
+      required: true
+    },
     name: {
       type: String,
       required: true
@@ -36,7 +40,7 @@ export default {
     isFavorite: {
       type: Boolean,
       required: false,
-      default: false,
+      default: true
       /*validator: function(value) {
         // Return either this or that, no other result will be accepted. // String: "1" or "0", Boolean: true or false
         return value === '1' || value === '0'
@@ -45,8 +49,7 @@ export default {
   },
   data() {
     return {
-      showDetail: false,
-      friendIsFavorite: this.isFavorite, 
+      showDetail: false
     }
   },
   methods: {
@@ -54,7 +57,8 @@ export default {
         this.showDetail = !this.showDetail;
       },
       toggleFavorite() {
-        this.friendIsFavorite = !this.friendIsFavorite;
+        // $emit('event-name', data), eg: this.id would be the first argument for the method 'toggle-favorite' in the parent
+        this.$emit('toggle-favorite', this.id);
       }
   }
 }

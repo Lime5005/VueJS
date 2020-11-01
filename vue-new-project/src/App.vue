@@ -3,7 +3,14 @@
   <header><h1>My Friends</h1></header>
   <!--这里把信息传递给子方，通过命名的暗号，父方用kebab-case，子方用camelCase-->
   <!--use v-bind to be more dynamic-->
-  <friend-contact v-for="friend in friends" :key="friend.id" :name="friend.name" :phone-number="friend.phone" :email-address="friend.email" :is-favorite="true"></friend-contact>
+  <friend-contact v-for="friend in friends" 
+  :key="friend.id" 
+  :id="friend.id" 
+  :name="friend.name" 
+  :phone-number="friend.phone"
+  :email-address="friend.email" 
+  :is-favorite="friend.isFavorite"
+  @toggle-favorite="toggleFavoriteStatus"></friend-contact>
 
 </section>
 </template>
@@ -17,16 +24,29 @@ export default {
           id: '1',
           name: 'lily',
           phone: '222',
-          email: 'lily@localhost.com'
+          email: 'lily@localhost.com',
+          isFavorite: true
         },
         { 
           id: '2',
           name: 'David',
           phone: '111',
-          email: 'david@localhost.com'
-        },
-
+          email: 'david@localhost.com',
+          isFavorite: false
+        }
       ]
+    }
+  },
+  methods: {
+    toggleFavoriteStatus(friendId) {
+      // find( the first value that meets the requirement) is a build-in function in array
+      // 听到指令，改变游戏规则
+      //alert('ok');
+       const foundFriend = this.friends.find(friend => friend.id === friendId);
+       //console.log(foundFriend.isFavorite);
+       foundFriend.isFavorite = !foundFriend.isFavorite;
+       //console.log(foundFriend.isFavorite);
+       // 子emit信息给父，父接收信息，改变游戏规则，再传给子，然后子再将改变的信息显示到页面
     }
   }
 }
