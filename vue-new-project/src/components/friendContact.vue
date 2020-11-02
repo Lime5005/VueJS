@@ -3,6 +3,7 @@
     <h2>{{ name }} {{ isFavorite ? 'Yes' : 'No' }}</h2>
     <button @click="toggleDetail">{{ showDetail ? 'Hide' : 'Show'}}</button>
     <button @click="toggleFavorite">Toggle Favorite</button>
+    <button @click="$emit('delete-friend', id)">Delete</button>
     <ul v-if="showDetail">
       <li><strong>Phone: </strong>{{ phoneNumber }}</li>
       <li><strong>Email: </strong>{{ emailAddress }}</li>

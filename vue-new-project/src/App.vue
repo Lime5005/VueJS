@@ -3,15 +3,18 @@
   <header><h1>My Friends</h1></header>
   <!--这里把信息传递给子方，通过命名的暗号，父方用kebab-case，子方用camelCase-->
   <!--use v-bind to be more dynamic-->
-  <friend-contact v-for="friend in friends" 
-  :key="friend.id" 
-  :id="friend.id" 
-  :name="friend.name" 
-  :phone-number="friend.phone"
-  :email-address="friend.email" 
-  :is-favorite="friend.isFavorite"
-  @toggle-favorite="toggleFavoriteStatus"></friend-contact>
-
+  <new-friend @add-contact="addContact"></new-friend>
+  <ul>
+    <friend-contact v-for="friend in friends" 
+    :key="friend.id" 
+    :id="friend.id" 
+    :name="friend.name" 
+    :phone-number="friend.phone"
+    :email-address="friend.email" 
+    :is-favorite="friend.isFavorite"
+    @delete-friend="deleteFriend"
+    @toggle-favorite="toggleFavoriteStatus"></friend-contact>
+  </ul>
 </section>
 </template>
 
@@ -47,6 +50,19 @@ export default {
        foundFriend.isFavorite = !foundFriend.isFavorite;
        //console.log(foundFriend.isFavorite);
        // 子emit信息给父，父接收信息，改变游戏规则，再传给子，然后子再将改变的信息显示到页面
+    },
+    addContact(name, phone, email) {
+      const newFriend = {
+        id: new Date().toISOString(),
+        name: name,
+        phone: phone,
+        email: email,
+        isFavorite: false,
+      };
+      this.friends.push(newFriend);
+    },
+    deleteFriend(id) {
+      this.friends = this.friends.filter(friend => friend.id !== id);
     }
   }
 }
@@ -84,7 +100,8 @@ header {
   list-style: none;
 }
 
-#app li {
+#app li,
+#app form {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   margin: 1rem auto;
   border-radius: 10px;
@@ -116,6 +133,22 @@ header {
   background-color: #ec3169;
   border-color: #ec3169;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
+}
+
+#app input {
+  font: inherit;
+  padding: 0.15rem;
+}
+
+#app label {
+  font-weight: bold;
+  margin-right: 1rem;
+  width: 7rem;
+  display: inline-block;
+}
+
+#app form div {
+  margin: 1rem 0;
 }
 
 </style>
