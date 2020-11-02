@@ -62,6 +62,7 @@ export default {
       this.friends.push(newFriend);
     },
     deleteFriend(id) {
+      // array.find() 找到第一个符合条件的元素， array.filter()新出一个符合条件的array, 排除不符合条件的元素
       this.friends = this.friends.filter(friend => friend.id !== id);
     }
   }
