@@ -4,7 +4,7 @@
       <template #header> <!--v-slot:=#-->
         <h2>Available Badges</h2>
       </template>
-      <template #default>
+      <template v-slot:default>
         <ul>
           <li>
             <base-badge type="admin" caption="ADMIN"></base-badge>
