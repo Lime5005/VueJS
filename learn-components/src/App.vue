@@ -2,44 +2,38 @@
   <div>
     <!--<the-header></the-header>-->
     <TheHeader />
-    <!--<badge-list></badge-list>-->
-    <BadgeList />
-    <user-info
-      :full-name="activeUser.name"
-      :info-text="activeUser.description"
-      :role="activeUser.role"
-    ></user-info>
-    <my-goals>
-      <!--This will not work : <h2>{{ goal }}</h2>, solution: scoped slot.-->
-      <template v-slot="slotProps"> <!--slotProps represents all the key:value pairs passed by this slot in MyGoals.vue file-->
-        <h2>
-          {{ slotProps.goal }}
-        </h2>
-        <p>{{ slotProps['another-prop']}}</p>
-      </template>
-    </my-goals>
-    <active-goals></active-goals>
-    <manage-goals></manage-goals>
+
+    <button @click="setSelectedComponent('active-goals')">Active Goals</button>
+    <button @click="setSelectedComponent('manage-goals')">Manage Goals</button>
+
+    <!--<active-goals v-if="selectedComponent === 'active-goals'"></active-goals>
+    <manage-goals v-if="selectedComponent === 'manage-goals'"></manage-goals> 这两行components被下一行直接取代-->
+    <!--Dynamic components! v-bind:is === v-if, 自动找到要显示的component-->
+    <component :is="selectedComponent"></component>
+
   </div>
 </template>
 
 <script>
 import TheHeader from './components/TheHeader.vue';
-import BadgeList from './components/BadgeList.vue';
-import UserInfo from './components/UserInfo.vue';
-import MyGoals from './components/MyGoals.vue';
-// import ManageGoals from './components/ManageGoals';
-// import ActiveGoals from './components/ActiveGoals';
+// import BadgeList from './components/BadgeList.vue';
+// import UserInfo from './components/UserInfo.vue';
+// import MyGoals from './components/MyGoals.vue';
+ import ManageGoals from './components/ManageGoals';
+ import ActiveGoals from './components/ActiveGoals';
 
 export default {
   components: {
     TheHeader,
-    BadgeList,
+    /*BadgeList,
     UserInfo,
-    MyGoals
+    MyGoals,*/
+    ManageGoals,
+    ActiveGoals
   },
   data() {
     return {
+      selectedComponent: 'active-goals',
       activeUser: {
         name: 'Maximilian Schwarzmüller',
         description: 'Site owner and admin',
@@ -47,6 +41,11 @@ export default {
       },
     };
   },
+  methods: {
+    setSelectedComponent(cmp) {
+      this.selectedComponent = cmp;
+    }
+  }
 };
 </script>
 
