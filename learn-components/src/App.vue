@@ -1,7 +1,9 @@
 <template>
   <div>
-    <the-header></the-header>
-    <badge-list></badge-list>
+    <!--<the-header></the-header>-->
+    <TheHeader />
+    <!--<badge-list></badge-list>-->
+    <BadgeList />
     <user-info
       :full-name="activeUser.name"
       :info-text="activeUser.description"
