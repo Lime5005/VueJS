@@ -1,31 +1,16 @@
 <template>
   <the-header title="Learning Resources"></the-header>
+  <the-resources></the-resources>
 </template>
 
 <script>
-
+import theResources from './components/resources/theResources';
 import theHeader from './components/layout/theHeader';
 export default {
   components: {
-    theHeader
-  },
-  data() {
-    return {
-      storedResources: [
-        {id: '1',
-        title: 'Official guide',
-        description: 'Vue documentation.',
-        link: 'https://vue.org'},
-        {
-          id: '2',
-          title: 'Google',
-          description: 'Google search',
-          link: 'http://google.com'
-        }
-      ]
-    }
-  },
-
+    theHeader,
+    theResources
+  }
 }
 </script>
 

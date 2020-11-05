@@ -10,7 +10,7 @@
 <script>
 import resourceListItem from './resourceListItem';
 export default {
-  props: ['resources'],
+  inject: ['resources'],
   components: {
     resourceListItem
   }

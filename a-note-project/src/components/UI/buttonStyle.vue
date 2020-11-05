@@ -3,7 +3,7 @@
     <slot></slot>
   </button>
 
-  <!--<button-style mode="flat"></button-style>-->
+  <!--<button-style mode="flat">要么是默认，要么带class='flat'</button-style>-->
 </template>
 
 <script>
