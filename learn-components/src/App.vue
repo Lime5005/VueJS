@@ -9,8 +9,9 @@
     <!--<active-goals v-if="selectedComponent === 'active-goals'"></active-goals>
     <manage-goals v-if="selectedComponent === 'manage-goals'"></manage-goals> 这两行components被下一行直接取代-->
     <!--Dynamic components! v-bind:is === v-if, 自动找到要显示的component-->
-    <component :is="selectedComponent"></component>
-
+    <keep-alive>
+      <component :is="selectedComponent"></component>
+    </keep-alive>
   </div>
 </template>
 
