@@ -1,18 +1,18 @@
 <template>
   <ul v-for="resource in resources" :key="resource.id">
-    <resource-list
+    <resource-list-item
     :title="resource.title"
     :description="resource.description"
-    :link="resource.link"></resource-list>
+    :link="resource.link"></resource-list-item>
   </ul>
 </template>
 
 <script>
-import resourceList from './resourceList';
+import resourceListItem from './resourceListItem';
 export default {
   props: ['resources'],
   components: {
-    resourceList
+    resourceListItem
   }
 }
 </script>

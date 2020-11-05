@@ -1,15 +1,12 @@
 <template>
   <the-header title="Learning Resources"></the-header>
-  <stored-resources :resources="storedResources"></stored-resources>
 </template>
 
 <script>
 
-import storedResources from './components/resources/storedResources';
 import theHeader from './components/layout/theHeader';
 export default {
   components: {
-    storedResources,
     theHeader
   },
   data() {
