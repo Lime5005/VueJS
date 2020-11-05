@@ -1,17 +1,15 @@
 <template>
-  <div>
-    <h2>Manage Goals</h2>
-    <input type="text" ref="goal">
-    <button @click="setGoal">Set Goal</button>
-    <!--用teleport封装起来, change the nested ErrorAlert component to the root body HTML element, it's more clear in this way.-->
-    <teleport to="body">
-      <error-alert v-if="inputIsInvalid">
-        <h2>Input is Invalid!</h2>
-        <p>Please enter at least a few character</p>
-        <button @click="errorConfirm">OK</button>
-      </error-alert>
-    </teleport>
-  </div>
+  <h2>Manage Goals</h2>
+  <input type="text" ref="goal">
+  <button @click="setGoal">Set Goal</button>
+  <!--用teleport封装起来, change the nested ErrorAlert component tothe root body HTML element, it's more clear in this way.-->
+  <teleport to="body">
+    <error-alert v-if="inputIsInvalid">
+      <h2>Input is Invalid!</h2>
+      <p>Please enter at least a few character</p>
+      <button @click="errorConfirm">OK</button>
+    </error-alert>
+  </teleport>
 </template>
 
 <script>
