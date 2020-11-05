@@ -13,20 +13,17 @@ export default {
 </script>
 <style scoped>
 button {
+  padding: 0.75rem 1.5rem;
   background-color: #3a0061;
-  border: none;
+  border: 1px solid #3a0061;
   color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  cursor: pointer;
 }
 
 button:hover,
 button:active {
-  background-color: blueviolet;
-  border-color: blueviolet;
+  background-color: #270041;
+  border-color:#270041;
 }
 
 .flat {
