@@ -3,7 +3,8 @@
     <card-style>
         <header>
           <h3>{{title}}</h3>
-          <button-style mode="flat">Delete</button-style>
+          <!--不是直接加上@event，而是用provide, inject:-->
+          <button-style mode="flat" @click="deleteResource(id)">Delete</button-style>
         </header>
       
       <p>{{description}}</p>
@@ -16,7 +17,8 @@
 
 <script>
 export default {
-  props: ['title', 'description', 'link']
+  props: ['id', 'title', 'description', 'link'],
+  inject: ['deleteResource']
 }
 </script>
 

@@ -40,7 +40,8 @@ export default {
     return {
       //分别是给两个不同的components: a data property and a method
       resources: this.storedResources,
-      addResources: this.addResources
+      addResources: this.addResources,
+      deleteResource: this.deleteResource
     }
   },
   computed: {
@@ -65,6 +66,11 @@ export default {
 
       this.storedResources.unshift(newResource);
       this.selectedTab = 'stored-resources';
+    },
+    deleteResource(id) {
+      //这里之所以不用filter排除此id并建立一个新的array，是因为新的array不能够被其他组件识别, (provide里的其他功能就不能用了):
+      const resIndex = this.storedResources.findIndex((res) => res.id === id);
+      this.storedResources.splice(resIndex, 1);
     }
   }
 }
