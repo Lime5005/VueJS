@@ -4,7 +4,10 @@
     <button-style @click="setSelectedTab('stored-resources')" :mode="StoredMode">Stored Resources</button-style>
     <button-style @click="setSelectedTab('add-resources')" :mode="AddMode">Add Resource</button-style>
   </card-style>
-  <component :is="selectedTab"></component>
+  <!--用keep-alive封装，即使跳转页面，依然保存已经输入的数据-->
+  <keep-alive>
+    <component :is="selectedTab"></component>
+  </keep-alive>
 </template>
 
 <script>
@@ -35,7 +38,9 @@ export default {
   },
   provide() {
     return {
-      resources: this.storedResources
+      //分别是给两个不同的components: a data property and a method
+      resources: this.storedResources,
+      addResources: this.addResources
     }
   },
   computed: {
@@ -49,6 +54,17 @@ export default {
   methods: {
     setSelectedTab(tab) {
       this.selectedTab = tab;
+    },
+    addResources(title, description, url) {
+      const newResource = {
+        id: new Date().toISOString(),
+        title: title,
+        description: description,
+        link: url
+      }
+
+      this.storedResources.unshift(newResource);
+      this.selectedTab = 'stored-resources';
     }
   }
 }

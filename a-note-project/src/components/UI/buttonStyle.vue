@@ -18,12 +18,14 @@ button {
   border: 1px solid #3a0061;
   color: white;
   cursor: pointer;
+  border-radius: 8px;
 }
 
 button:hover,
 button:active {
   background-color: #270041;
   border-color:#270041;
+  border-radius: 8px;
 }
 
 .flat {
