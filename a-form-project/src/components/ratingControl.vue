@@ -1,7 +1,8 @@
 <template>
   <p>How do you rate the site? </p>
   <ul>
-    <li :class="{active: modelValue === 'poor'}"><button type="button" @click="activate('poor')">Poor</button></li><!--加上type="button"避免自动刷新-->
+    <!--加上type="button" inactivate the default submit form-->
+    <li :class="{active: modelValue === 'poor'}"><button type="button" @click="activate('poor')">Poor</button></li>
     <li :class="{active: modelValue === 'average'}"><button type="button" @click="activate('average')">Average</button></li>
     <li :class="{active: modelValue === 'great'}"><button type="button" @click="activate('great')">Great</button></li>
   </ul>
@@ -9,6 +10,7 @@
 
 <script>
 export default {
+  //把选择的值通过emit的方式反射到prop里，再反射到component对应的v-model=“值” 
   props: ['modelValue'],
   emits: ['update:modelValue'],
   // data() {

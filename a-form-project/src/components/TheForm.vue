@@ -7,7 +7,7 @@
     </div>
     <div class="form-control">
       <label for="age">Your Age (Years)</label>
-      <input id="age" name="age" type="number" v-model="userAge" />
+      <input id="age" name="age" type="number" v-model.number="userAge" />
     </div>
     <div class="form-control">
       <label for="referrer">How did you hear about us?</label>
@@ -48,7 +48,9 @@
       </div>
     </div>
     <div class="form-control">
-      <!--这里的v-model="rating"是特定的，相当于既要听input又要绑定value， 绑定了props :model-value="" 还有@update:model-value=""-->
+      <!--这里的v-model="rating"是特定的，相当于既要听input又要绑定value， 绑定了props :model-value="" 还有@update:model-value=""
+      把选择的值通过emit的方式反射到prop里，再反射到component对应的v-model=“值” 
+-->
       <rating-control v-model="rating"></rating-control>
     </div>
     <div class="form-control">
