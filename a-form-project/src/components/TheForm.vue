@@ -48,6 +48,10 @@
       </div>
     </div>
     <div class="form-control">
+      <!--这里的v-model="rating"是特定的，相当于既要听input又要绑定value， 绑定了props :model-value="" 还有@update:model-value=""-->
+      <rating-control v-model="rating"></rating-control>
+    </div>
+    <div class="form-control">
       <input type="checkbox" id="confirm-term" name="confirm-term" v-model="confirm" />
       <label for="confirm-term">Do you agree our user terms?</label>
     </div>
@@ -58,7 +62,12 @@
 </template>
 
 <script>
+import ratingControl from './ratingControl';
+
 export default {
+  components: {
+    ratingControl
+  },
   data() {
     return {
       userName: '',
@@ -73,6 +82,7 @@ export default {
       // 如果是单独的是否选项，就用true or false定义，注意手动刷新页面观察改变：
       confirm: false,
       userNameValidity: 'pending...',
+      rating: null
     }
   },
   methods: {
@@ -90,6 +100,8 @@ export default {
       this.how = null;
       console.log(this.confirm);
       this.confirm = false;
+      console.log(this.rating);
+      this.rating = null;
     },
     checkInput() {
       if(this.userName === '') {
