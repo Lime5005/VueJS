@@ -1,8 +1,9 @@
 <template>
   <form @submit.prevent="submitForm">
-    <div class="form-control">
+    <div class="form-control" :class="{invalid: userNameValidity === 'Invalid'}">
       <label for="user-name">Your Name</label>
-      <input id="user-name" name="user-name" type="text" v-model="userName" />
+      <input id="user-name" name="user-name" type="text" v-model.trim="userName" @blur="checkInput"/>
+      <p v-if="userNameValidity === 'Invalid'">Please enter your name!</p>
     </div>
     <div class="form-control">
       <label for="age">Your Age (Years)</label>
@@ -70,7 +71,8 @@ export default {
       // radio, 单选题不用array: (注意：checkbox, radio 都要带value，不然改选不了)
       how: null,
       // 如果是单独的是否选项，就用true or false定义，注意手动刷新页面观察改变：
-      confirm: false
+      confirm: false,
+      userNameValidity: 'pending...',
     }
   },
   methods: {
@@ -88,6 +90,13 @@ export default {
       this.how = null;
       console.log(this.confirm);
       this.confirm = false;
+    },
+    checkInput() {
+      if(this.userName === '') {
+        this.userNameValidity = 'Invalid';
+      } else {
+        this.userNameValidity = 'Valid';
+      }
     }
   }
 }
@@ -114,6 +123,14 @@ label {
 h2 {
   font-size: 1rem;
   margin: 0.5rem 0;
+}
+
+.form-control.invalid input {
+  border-color: red;
+}
+
+.form-control.invalid label {
+  color: red;
 }
 
 input,
