@@ -6,8 +6,9 @@
         <base-button @click="loadAllResults">Load Submitted Experiences</base-button>
       </div>
       <p v-if="isLoading">Loading...</p>
-      <p v-else-if="!isLoading && (!results || results.length === 0)">No data yet, starting to add some!</p>
-      <ul v-else-if="!isLoading && results && results.length > 0">
+      <p v-else-if="!isLoading && errorMessage ">{{ errorMessage }}</p>
+      <p v-else-if="!isLoading && (!results || results.length === 0)">No data yet, starting to add some!</p>     
+      <ul v-else>
         <survey-result
           v-for="result in results"
           :key="result.id"
@@ -30,12 +31,14 @@ export default {
   data() {
     return {
       results: [],
-      isLoading: false
+      isLoading: false,
+      errorMessage: null
     }
   },
   methods: {
     loadAllResults() {
       this.isLoading = true;
+      this.errorMessage = null;
       //if it's a GET request, it's a default method, so less code than POST:
       fetch('https://vue-http-project-960b4.firebaseio.com/serveys.json')
       .then(res => {
@@ -56,6 +59,12 @@ export default {
         }
         return this.results;
       })
+      .catch(err => {
+        this.isLoading = false;
+        //如果url有错，会报错:
+        this.errorMessage = 'Failed to fetch data, please try it again later...'
+        console.log(err);//这个必须的，否则报错
+      })    
     }
   },
   mounted() {
