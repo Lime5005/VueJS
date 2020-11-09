@@ -91,7 +91,9 @@ export default {
     submitForm() {
       console.log('name: ' + this.userName);
       this.userName = '';
-      console.log('age: ' + this.userAge+5);
+      console.log(typeof(this.userAge)); //number
+      console.log(this.userAge+5);
+      console.log('age: ' + (this.userAge+5)); // age: 44 + 5 = 49
       //console.log(this.$refs.inputAge.value + 5);
       this.userAge = null;
       console.log('referrer: ' + this.referrer);
