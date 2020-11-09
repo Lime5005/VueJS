@@ -5,7 +5,8 @@
       <div>
         <base-button @click="loadAllResults">Load Submitted Experiences</base-button>
       </div>
-      <ul>
+      <p v-if="isLoading">Loading...</p>
+      <ul v-if="!isLoading">
         <survey-result
           v-for="result in results"
           :key="result.id"
@@ -27,11 +28,13 @@ export default {
   },
   data() {
     return {
-      results: []
+      results: [],
+      isLoading: false
     }
   },
   methods: {
     loadAllResults() {
+      this.isLoading = true;
       //if it's a GET request, it's a default method, so less code than POST:
       fetch('https://vue-http-project-960b4.firebaseio.com/serveys.json')
       .then(res => {
@@ -40,6 +43,7 @@ export default {
         }
       })
       .then(data => {
+        this.isLoading = false;
         //console.log(data);
         //const serveysResults = [];
         for(const id in data) {
@@ -52,6 +56,9 @@ export default {
         return this.results;
       })
     }
+  },
+  mounted() {
+    this.loadAllResults();
   }
 };
 </script>
