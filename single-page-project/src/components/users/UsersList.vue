@@ -1,4 +1,5 @@
 <template>
+  <button @click="confirm">Go Back!</button>
   <ul>
     <user-item v-for="user in users" :key="user.id" :name="user.fullName" :role="user.role"></user-item>
   </ul>
@@ -12,6 +13,12 @@ export default {
     UserItem,
   },
   inject: ['users'],
+  methods: {
+    confirm() {
+      this.$router.push('/teams');
+      //this.$router.back() or forward()
+    }
+  }
 };
 </script>
 
