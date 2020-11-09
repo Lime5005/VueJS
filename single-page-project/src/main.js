@@ -10,7 +10,8 @@ const router = createRouter({
     routes: [
         { path: '/teams', component: TeamsList },
         { path: '/users', component: UsersList },
-    ]
+    ],
+    linkActiveClass: 'active' //overwrite 'router-link-active'
 })
 
 const app = createApp(App)
