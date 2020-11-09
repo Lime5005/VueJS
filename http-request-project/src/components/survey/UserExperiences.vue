@@ -3,7 +3,7 @@
     <base-card>
       <h2>Submitted Experiences</h2>
       <div>
-        <base-button>Load Submitted Experiences</base-button>
+        <base-button @click="loadAllResults">Load Submitted Experiences</base-button>
       </div>
       <ul>
         <survey-result
@@ -21,10 +21,38 @@
 import SurveyResult from './SurveyResult.vue';
 
 export default {
-  props: ['results'],
+  //props: ['results'],
   components: {
     SurveyResult,
   },
+  data() {
+    return {
+      results: []
+    }
+  },
+  methods: {
+    loadAllResults() {
+      //if it's a GET request, it's a default method, so less code than POST:
+      fetch('https://vue-http-project-960b4.firebaseio.com/serveys.json')
+      .then(res => {
+        if(res.ok) {
+          return res.json();
+        }
+      })
+      .then(data => {
+        //console.log(data);
+        //const serveysResults = [];
+        for(const id in data) {
+          this.results.push({
+            id: id,
+            name: data[id].name,
+            rating: data[id].rating
+          })
+        }
+        return this.results;
+      })
+    }
+  }
 };
 </script>
 

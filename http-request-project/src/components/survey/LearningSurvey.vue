@@ -46,7 +46,7 @@ export default {
       invalidInput: false,
     };
   },
-  emits: ['survey-submit'],
+  //emits: ['survey-submit'],
   methods: {
     submitSurvey() {
       if (this.enteredName === '' || !this.chosenRating) {
@@ -55,10 +55,23 @@ export default {
       }
       this.invalidInput = false;
 
-      this.$emit('survey-submit', {
-        userName: this.enteredName,
-        rating: this.chosenRating,
-      });
+      //有了fetch和服务端，就不需要本地记录了
+      // this.$emit('survey-submit', {
+      //   userName: this.enteredName,
+      //   rating: this.chosenRating,
+      // });
+
+      //serveys.json, the json here is required by firebase:
+      fetch('https://vue-http-project-960b4.firebaseio.com/serveys.json', {
+        method: 'POST',
+        header: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: this.enteredName,
+          rating: this.chosenRating,
+        }),
+      })
 
       this.enteredName = '';
       this.chosenRating = null;
