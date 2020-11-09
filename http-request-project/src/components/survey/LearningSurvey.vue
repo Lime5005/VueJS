@@ -64,15 +64,15 @@ export default {
       // });
       this.error = null;
       //serveys.json, the json here is required by firebase:
-      fetch('https://vue-http-project-960b4.firebaseio.com/serveys', {
+      fetch('https://vue-http-project-960b4.firebaseio.com/serveys.json', {
         method: 'POST',
         header: {
           'Content-Type': 'application/json',
         },
-        body: {
+        body: JSON.stringify({
           name: this.enteredName,
           rating: this.chosenRating,
-        },
+        }),
       }).then(res => {
         if(res.ok) {
           //
@@ -81,7 +81,7 @@ export default {
         }
       }).catch(err => {
         console.log(err);
-        this.errorMsg = err.message;       
+        this.errorMsg = err.message;     
       })
 
       this.enteredName = '';
