@@ -26,9 +26,10 @@
           <input type="radio" id="rating-great" value="great" name="rating" v-model="chosenRating" />
           <label for="rating-great">Great</label>
         </div>
+        <p v-if="errorMsg">{{ errorMsg }}</p>
         <p
           v-if="invalidInput"
-        >One or more input fields are invalid. Please check your provided data.</p>
+        >One or more input fields are invalid. Please check your provided data.</p>      
         <div>
           <base-button>Submit</base-button>
         </div>
@@ -44,6 +45,7 @@ export default {
       enteredName: '',
       chosenRating: null,
       invalidInput: false,
+      errorMsg: null
     };
   },
   //emits: ['survey-submit'],
@@ -60,17 +62,26 @@ export default {
       //   userName: this.enteredName,
       //   rating: this.chosenRating,
       // });
-
+      this.error = null;
       //serveys.json, the json here is required by firebase:
-      fetch('https://vue-http-project-960b4.firebaseio.com/serveys.json', {
+      fetch('https://vue-http-project-960b4.firebaseio.com/serveys', {
         method: 'POST',
         header: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
+        body: {
           name: this.enteredName,
           rating: this.chosenRating,
-        }),
+        },
+      }).then(res => {
+        if(res.ok) {
+          //
+        } else {
+          throw new Error('Could not save data!')
+        }
+      }).catch(err => {
+        console.log(err);
+        this.errorMsg = err.message;       
       })
 
       this.enteredName = '';
