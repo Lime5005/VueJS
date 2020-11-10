@@ -8,8 +8,8 @@ import TeamMembers from './components/teams/TeamMembers.vue';
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: '/', redirect: '/teams' },
-        { path: '/teams', component: TeamsList },
+        //{ path: '/', redirect: '/teams' },
+        { path: '/teams', component: TeamsList, alias: '/' },
         { path: '/users', component: UsersList },
         { path: '/teams/:teamId', component: TeamMembers, props: true } //when it's loaded, the dynamic :teamId will be passed as props into the component
     ],
