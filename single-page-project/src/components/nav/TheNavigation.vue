@@ -6,7 +6,8 @@
           <router-link to="/teams">Teams</router-link>
         </li>
         <li>
-          <router-link to="users">Users</router-link>
+          <router-link to="/users">Users</router-link>
+          <!--Note that nested paths that start with / will be treated as a root path. This allows you to leverage the component nesting without having to use a nested URL-->
         </li>
       </ul>
     </nav>

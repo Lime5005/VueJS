@@ -9,14 +9,15 @@ import NotFound from './components/nav/NotFound.vue';
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        //{ path: '/', redirect: '/teams' },
+        { path: '/', redirect: '/teams' },
         {
             path: '/teams',
             component: TeamsList,
-            alias: '/',
-            children: [
-                { path: ':teamId', component: TeamMembers, props: true }
-            ]
+            children: [{
+                path: ':teamId',
+                component: TeamMembers,
+                props: true
+            }]
         },
         { path: '/users', component: UsersList },
         //{ path: '/teams/:teamId', component: TeamMembers, props: true }, //when it's loaded, the dynamic :teamId will be passed as props into the component
