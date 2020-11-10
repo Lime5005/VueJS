@@ -18,7 +18,7 @@ import UserItem from '../users/UserItem.vue';
 
 export default {
   inject: ['users', 'teams'],
-  props: ['teamId'],//so this component is more re-usable, as well as it's provided in the props.
+  props: ['teamId'],//so this component is more re-usable, as well as it's provided in the props. This way is more efficient than searching by this.$route.params.
   components: {
     UserItem
   },

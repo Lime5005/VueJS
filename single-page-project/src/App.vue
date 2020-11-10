@@ -2,6 +2,7 @@
   <the-navigation></the-navigation>
   <main>
     <router-view></router-view>
+    <!--route-view is directed to the root routes array in main.js-->
     <!--<component :is="activePage"></component>-->
   </main>
 </template>
