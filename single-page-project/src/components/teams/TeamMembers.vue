@@ -26,12 +26,9 @@ export default {
       members: []
     };
   },
-  // created是在所有数据到齐的时候启动：
-  created() {
-    //this.$route.path // this.$route gives access to some data,eg: teams/t1 
-    //use teamId to find team members:
-    // this.$route.path // /teams/t1
-    const teamId = this.$route.params.teamId;
+  methods: {
+    loadTeamMembers(route) {
+    const teamId = route.params.teamId;
     const selectedTeam = this.teams.find(team => team.id === teamId);
     const members = selectedTeam.members;
     const selectedMembers = [];
@@ -41,6 +38,19 @@ export default {
     }
     this.members = selectedMembers;
     this.teamName = selectedTeam.name;
+    }
+  },
+  // created是在所有数据到齐的时候启动：它只能在组件刚建成时使用，不可再做页面内的更改和跳转
+  created() {
+    //this.$route.path // this.$route gives access to some data,eg: teams/t1 
+    //use teamId to find team members:
+    // this.$route.path // /teams/t1
+    this.loadTeamMembers();
+  },
+  watch: {
+    $route(newRoute) {
+      this.loadTeamMembers(newRoute);
+    }
   }
 };
 </script>
