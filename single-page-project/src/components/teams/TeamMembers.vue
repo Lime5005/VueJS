@@ -9,6 +9,7 @@
         :role="member.role"
       ></user-item>
     </ul>
+    <router-link to="/teams/t2">Go to team2</router-link>
   </section>
 </template>
 
@@ -17,6 +18,7 @@ import UserItem from '../users/UserItem.vue';
 
 export default {
   inject: ['users', 'teams'],
+  props: ['teamId'],
   components: {
     UserItem
   },
@@ -27,8 +29,7 @@ export default {
     };
   },
   methods: {
-    loadTeamMembers(route) {
-    const teamId = route.params.teamId;
+    loadTeamMembers(teamId) {
     const selectedTeam = this.teams.find(team => team.id === teamId);
     const members = selectedTeam.members;
     const selectedMembers = [];
@@ -45,11 +46,11 @@ export default {
     //this.$route.path // this.$route gives access to some data,eg: teams/t1 
     //use teamId to find team members:
     // this.$route.path // /teams/t1
-    this.loadTeamMembers();
+    this.loadTeamMembers(this.teamId);
   },
   watch: {
-    $route(newRoute) {
-      this.loadTeamMembers(newRoute);
+    teamId(newId) {
+      this.loadTeamMembers(newId);
     }
   }
 };
