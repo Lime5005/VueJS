@@ -5,6 +5,9 @@
     <!--route-view is directed to the root routes array in main.js-->
     <!--<component :is="activePage"></component>-->
   </main>
+  <footer>
+    <router-view name="footer"></router-view>
+  </footer>
 </template>
 
 <script>
