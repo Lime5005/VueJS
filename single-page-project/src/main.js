@@ -33,7 +33,14 @@ const router = createRouter({
         //{ path: '/teams/:teamId', component: TeamMembers, props: true }, //when it's loaded, the dynamic :teamId will be passed as props into the component
         { path: '/:notFound(.*)', component: NotFound }
     ],
-    linkActiveClass: 'active' //overwrite 'router-link-active'
+    linkActiveClass: 'active', //overwrite 'router-link-active'
+    scrollBehavior(to, from, savedPosition) {
+        console.log(to, from, savedPosition);
+        if (savedPosition) {
+            return savedPosition;
+        }
+        return { left: 0, top: 0 }
+    }
 })
 
 const app = createApp(App)
