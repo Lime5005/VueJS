@@ -16,6 +16,7 @@ const router = createRouter({
         {
             name: 'teams',
             path: '/teams',
+            meta: { needsAuth: true },
             //component: TeamsList,
             components: { default: TeamsList, footer: teamFooter },
             children: [{
@@ -53,14 +54,20 @@ const router = createRouter({
 
 router.beforeEach(function(to, from, next) {
     console.log('Global beforeEach');
-    //console.log(to, from);
+    console.log(to, from);
+    if (to.meta.needsAuth) {
+        alert('Needs Auth!!');
+        next();
+    } else {
+        next();
+    }
     // if (to.name === 'team-members') {
     //     next();
     // } else {
     //     //阻止用户进入users页面：
     //     next({ name: 'team-members', params: { teamId: 't2' } })
     // }
-    next();
+    //next();
 })
 
 router.afterEach(function(to, from) {
