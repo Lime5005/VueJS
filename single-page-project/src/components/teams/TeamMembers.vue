@@ -49,6 +49,12 @@ export default {
     this.loadTeamMembers(this.teamId);
     console.log(this.$route.query.sort);//asc
   },
+  //This will only work if it's loaded and re-loaded through routing:
+  // beforeRouteUpdate(to, from, next){
+  //   console.log('beforeRouteUpdate!!!!');
+  //   this.loadTeamMembers(to.params.teamId);
+  //   next({ name: 'team-members', params: { teamId: 't2' } });//永远是t2
+  // },
   watch: {
     teamId(newId) {
       this.loadTeamMembers(newId);

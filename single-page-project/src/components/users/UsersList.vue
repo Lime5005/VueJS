@@ -19,6 +19,14 @@ export default {
       //this.$router.push('/teams');
       //this.$router.back() or forward()
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log('beforeRoute....');
+    console.log(to, from);
+    next(
+      //层层把关,指哪打哪{ name: 'team-members', params: { teamId: 't2' } }
+      //alert('ok')
+    );
   }
 };
 </script>

@@ -28,7 +28,15 @@ const router = createRouter({
         {
             path: '/users',
             //component: UsersList 
-            components: { default: UsersList, footer: userFooter }
+            components: { default: UsersList, footer: userFooter },
+            // beforeEnter层层把关：
+            beforeEnter(to, from, next) {
+                console.log('before enter');
+                console.log(to, from);
+                next(
+                    //Any route you want to lead to, eg: { name: 'team-members', params: { teamId: 't2' } }
+                )
+            }
         },
         //{ path: '/teams/:teamId', component: TeamMembers, props: true }, //when it's loaded, the dynamic :teamId will be passed as props into the component
         { path: '/:notFound(.*)', component: NotFound }
@@ -46,12 +54,19 @@ const router = createRouter({
 router.beforeEach(function(to, from, next) {
     console.log('Global beforeEach');
     //console.log(to, from);
-    if (to.name === 'team-members') {
-        next();
-    } else {
-        //阻止用户进入users页面：
-        next({ name: 'team-members', params: { teamId: 't2' } })
-    }
+    // if (to.name === 'team-members') {
+    //     next();
+    // } else {
+    //     //阻止用户进入users页面：
+    //     next({ name: 'team-members', params: { teamId: 't2' } })
+    // }
+    next();
+})
+
+router.afterEach(function(to, from) {
+    // sending data to server:比如监控用户换页等
+    console.log('Global afterEach');
+    console.log(to, from);
 })
 const app = createApp(App)
 app.use(router);
