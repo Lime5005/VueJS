@@ -15,8 +15,10 @@ export default {
       //return '/teams/' + this.id;
       return {
         name: 'team-members',
-        params:{teamId: this.id}
+        params:{teamId: this.id},
+        query: { sort: 'asc'}//http://localhost:8080/teams/t1?sort=asc
       }
+      // this.$router.push({name: 'team-members',params:{teamId: this.id}})
     }
   }
 };
