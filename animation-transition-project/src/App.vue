@@ -4,7 +4,9 @@
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
+    <transition>
     <p v-if="showPara">This is only visible sometimes...</p>
+    </transition>
     <button @click="togglePara">Toggle Paragraph</button>
   </div>
   <base-modal @close="hideDialog" v-if="dialogIsVisible">
@@ -89,6 +91,20 @@ button:active {
   /* transform: translateX(-200px); */
   animation: slide-fade 0.3s ease-out forwards; 
  /*  forwards: keep the final state as the new look, the new state of the animated element. */
+}
+
+.v-enter-from {
+  opacity: 0; /* initially invisible */
+  transform: translateY(-30px) scale(0.9)  /* -20px : move above */
+}
+.v-enter-active {
+  transition: all 0.3s ease-out/* watch all animation changes, set a duration, */
+}
+
+/* final state:  */
+.v-enter-to {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 @keyframes slide-fade {
