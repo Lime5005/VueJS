@@ -9,6 +9,13 @@
     </transition>
     <button @click="togglePara">Toggle Paragraph</button>
   </div>
+  <div class="container">
+    <transition name="follow-btn" mode="out-in">
+      <button @click="follow" v-if="toFollow">Follow</button>
+      <button @click="unfollow" v-else>Unfollow</button>
+    </transition>
+  </div>
+
   <base-modal @close="hideDialog" :open="dialogIsVisible" >
     <p>This is a test dialog!</p>
     <button @click="hideDialog">Close it!</button>
@@ -24,10 +31,17 @@ export default {
     return { 
       moveBlock: false,
       dialogIsVisible: false,
-      showPara: false
+      showPara: false,
+      toFollow: true
       };
   },
   methods: {
+    follow() {
+      this.toFollow = false;
+    },
+    unfollow() {
+      this.toFollow = true;
+    },
     togglePara() {
       this.showPara = !this.showPara;
     },
@@ -117,6 +131,23 @@ button:active {
 /*   opacity: 0;
   transform: translateY(30px) scale(0.9); */
 }
+
+.follow-btn-enter-from,
+.follow-btn-leave-to {
+  opacity: 0;
+}
+.follow-btn-enter-active {
+  transition: opacity 0.3s ease-out;
+}
+.follow-btn-leave-active {
+  transition: opacity 0.3s ease-in;
+}
+
+.follow-btn-leave-from,
+.follow-btn-enter-to {
+  opacity: 1;
+}
+
 
 @keyframes slide-fade {
   0% {
