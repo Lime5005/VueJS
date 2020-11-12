@@ -75,7 +75,7 @@ button:active {
   border: 2px solid #ccc;
   border-radius: 12px;
 }
-
+/*This class will be called if the condition: moveBlock is true*/ 
 .animate {
   transform: translateX(-200px);
 }
