@@ -94,28 +94,28 @@ button:active {
 }
 
 .v-enter-from {
-  opacity: 0; /* initially invisible */
-  transform: translateY(-30px) scale(0.9)  /* -20px : move above */
+/*   opacity: 0; /* initially invisible 
+  transform: translateY(-30px) scale(0.9)  */  /* -20px : move above */
 }
 .v-enter-active {
-  transition: all 0.3s ease-out/* watch all animation changes, set a duration, */
+  animation: slide-fade 0.3s ease-out/* watch all animation changes, set a duration, */
 }
 
 /* final state:  */
 .v-enter-to {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+/*   opacity: 1;
+  transform: translateY(0) scale(1); */
 }
 .v-leave-from {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+/*   opacity: 1;
+  transform: translateY(0) scale(1); */
 }
 .v-leave-active {
-  transition: all 0.3s ease-in;
+  animation: slide-fade 0.3s ease-in;
 }
 .v-leave-to {
-  opacity: 0;
-  transform: translateY(30px) scale(0.9);
+/*   opacity: 0;
+  transform: translateY(30px) scale(0.9); */
 }
 
 @keyframes slide-fade {
