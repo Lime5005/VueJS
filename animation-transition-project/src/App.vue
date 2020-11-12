@@ -63,7 +63,7 @@ button:active {
   height: 8rem;
   background-color: #290033;
   margin-bottom: 2rem;
-  transition: transform 0.3s ease-out; /** name duration how throttled at the end*/
+  /* transition: transform 0.3s ease-out; */ /** name duration how throttled at the end*/
 }
 .container {
   max-width: 40rem;
@@ -78,6 +78,23 @@ button:active {
 }
 /*This class will be called if the condition: moveBlock is true*/ 
 .animate {
-  transform: translateX(-200px);
+  /* transform: translateX(-200px); */
+  animation: slide-fade 0.3s ease-out forwards; 
+ /*  forwards: keep the final state as the new look, the new state of the animated element. */
+}
+
+@keyframes slide-fade {
+  0% {
+    transform: translateX(0) scale(1);
+  }
+/* at 20% of the animation time, move to left by 150px, and make 20% bigger */
+  20% {
+    transform: translateX(-150px) scale(1.2);
+  }
+
+/* 到100的时候，animation结束时，左靠200px，回到原来大小 */
+  100% {
+    transform: translateX(-200px) scale(1);
+  }
 }
 </style>
