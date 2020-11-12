@@ -10,7 +10,7 @@
     <button @click="togglePara">Toggle Paragraph</button>
   </div>
   <div class="container">
-    <transition name="follow-btn" mode="out-in">
+    <transition name="follow-btn" mode="out-in"> <!-- 二选一的情况下可以多个子元素 -->
       <button @click="follow" v-if="toFollow">Follow</button>
       <button @click="unfollow" v-else>Unfollow</button>
     </transition>
