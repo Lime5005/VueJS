@@ -9,10 +9,10 @@
     </transition>
     <button @click="togglePara">Toggle Paragraph</button>
   </div>
-  <base-modal @close="hideDialog" v-if="dialogIsVisible">
+  <base-modal @close="hideDialog" :open="dialogIsVisible" >
     <p>This is a test dialog!</p>
     <button @click="hideDialog">Close it!</button>
-  </base-modal>
+  </base-modal> <!-- 这里不能直接加transition，因为base-modal里面含两个子元素: div&dialog -->
   <div class="container">
     <button @click="showDialog">Show Dialog</button>
   </div>
