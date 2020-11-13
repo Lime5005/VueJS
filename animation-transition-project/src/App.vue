@@ -4,7 +4,12 @@
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
-    <transition name="para">
+    <transition name="para" @before-enter="beforeEnter" 
+    @enter="enter" 
+    @after-enter="afterEnter"
+    @before-leave="beforeLeave"
+    @leave="leave"
+    @after-leave="afterLeave">
     <p v-if="showPara">This is only visible sometimes...</p>
     </transition>
     <button @click="togglePara">Toggle Paragraph</button>
@@ -36,6 +41,32 @@ export default {
       };
   },
   methods: {
+    beforeEnter(el) {
+      console.log('before enter');
+      console.log(el);
+    },
+    beforeLeave(el) {
+      console.log('before leave');
+      console.log(el);
+/*       el = `<a href="#">click here</a>`;
+      console.log(el); */
+    },
+    enter(el) {
+      console.log('enter');
+      console.log(el);
+    },
+    afterEnter(el) {
+      console.log('after enter');
+      console.log(el);
+    },
+    leave(el) {
+      console.log('leave');
+      console.log(el);
+    },
+    afterLeave(el){
+      console.log('after leave');
+      console.log(el);
+    },
     follow() {
       this.toFollow = false;
     },
@@ -112,7 +143,7 @@ button:active {
   transform: translateY(-30px) scale(0.9)  */  /* -20px : move above */
 }
 .para-enter-active {
-  animation: slide-fade 0.3s ease-out/* watch all animation changes, set a duration, */
+  animation: slide-fade 3s ease-out/* watch all animation changes, set a duration, */
 }
 
 /* final state:  */
@@ -125,7 +156,7 @@ button:active {
   transform: translateY(0) scale(1); */
 }
 .para-leave-active {
-  animation: slide-fade 0.3s ease-in;
+  animation: slide-fade 3s ease-in;
 }
 .v-leave-to {
 /*   opacity: 0;
