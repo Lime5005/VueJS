@@ -4,7 +4,7 @@
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
-    <transition name="para" @before-enter="beforeEnter" 
+    <transition @before-enter="beforeEnter" 
     @enter="enter" 
     @after-enter="afterEnter"
     @before-leave="beforeLeave"
@@ -45,23 +45,40 @@ export default {
       console.log('before enter');
       console.log(el);
     },
-    beforeLeave(el) {
-      console.log('before leave');
-      console.log(el);
-/*       el = `<a href="#">click here</a>`;
-      console.log(el); */
-    },
-    enter(el) {
+    enter(el, done) {
       console.log('enter');
       console.log(el);
+      let counter = 1;
+      const interval = setInterval(function() {
+        el.style.opacity = counter * 0.01;
+        counter ++;
+        if (counter > 100) {
+          clearInterval(interval);
+          done();
+        }
+      }, 20)
     },
     afterEnter(el) {
       console.log('after enter');
       console.log(el);
     },
-    leave(el) {
+    beforeLeave(el) {
+      console.log('before leave');
+      console.log(el);
+      el.style.opacity = 1;
+    },
+    leave(el, done) {
       console.log('leave');
       console.log(el);
+      let counter = 100;
+      const interv = setInterval(function() {
+        el.style.opacity = counter * 0.01;
+        counter --;
+        if (counter < 0) {
+          clearInterval(interv);
+          done();
+        }
+      }, 20)
     },
     afterLeave(el){
       console.log('after leave');
@@ -142,9 +159,7 @@ button:active {
 /*   opacity: 0; /* initially invisible 
   transform: translateY(-30px) scale(0.9)  */  /* -20px : move above */
 }
-.para-enter-active {
-  animation: slide-fade 3s ease-out/* watch all animation changes, set a duration, */
-}
+
 
 /* final state:  */
 .v-enter-to {
@@ -155,9 +170,7 @@ button:active {
 /*   opacity: 1;
   transform: translateY(0) scale(1); */
 }
-.para-leave-active {
-  animation: slide-fade 3s ease-in;
-}
+
 .v-leave-to {
 /*   opacity: 0;
   transform: translateY(30px) scale(0.9); */
