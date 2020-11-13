@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <users-list></users-list>
+  </div>
+  <div class="container">
     <div class="block" :class="{animate: moveBlock}"></div>
     <button @click="animateBlock">Animate</button>
   </div>
@@ -34,7 +37,12 @@
 </template>  
 
 <script>
+import usersList from './components/usersList';
+
 export default {
+  components: {
+    usersList
+  },
   data() {
     return { 
       moveBlock: false,
