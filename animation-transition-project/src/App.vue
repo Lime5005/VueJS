@@ -9,7 +9,9 @@
     @after-enter="afterEnter"
     @before-leave="beforeLeave"
     @leave="leave"
-    @after-leave="afterLeave">
+    @after-leave="afterLeave"
+    @enter-cancelled="enterCancelled"
+    @leave-cancelled="leaveCancelled">
     <p v-if="showPara">This is only visible sometimes...</p>
     </transition>
     <button @click="togglePara">Toggle Paragraph</button>
@@ -37,10 +39,22 @@ export default {
       moveBlock: false,
       dialogIsVisible: false,
       showPara: false,
-      toFollow: true
+      toFollow: true,
+      enterInterval: null,
+      leaveInterval: null
       };
   },
   methods: {
+    enterCancelled(el) {
+      console.log('CANCELLED ENTER');
+      console.log(el);
+      clearInterval(this.enterInterval)   
+    },
+    leaveCancelled(el) {
+      console.log('CANCELLED LEAVE');
+      console.log(el);
+      clearInterval(this.leaveInterval)
+    },
     beforeEnter(el) {
       console.log('before enter');
       console.log(el);
@@ -49,11 +63,11 @@ export default {
       console.log('enter');
       console.log(el);
       let counter = 1;
-      const interval = setInterval(function() {
+      this.enterInterval = setInterval(() => {
         el.style.opacity = counter * 0.01;
         counter ++;
         if (counter > 100) {
-          clearInterval(interval);
+          clearInterval(this.enterInterval);
           done();
         }
       }, 20)
@@ -70,15 +84,16 @@ export default {
     leave(el, done) {
       console.log('leave');
       console.log(el);
-      let counter = 100;
-      const interv = setInterval(function() {
-        el.style.opacity = counter * 0.01;
-        counter --;
-        if (counter < 0) {
-          clearInterval(interv);
+      let counter = 1;
+/*  arrow function makes using 'this' possible here */
+      this.leaveInterval = setInterval(() => {
+        el.style.opacity = 1 - counter * 0.01;
+        counter ++;
+        if (counter > 100) {
+          clearInterval(this.leaveInterval);
           done();
         }
-      }, 20)
+      }, 60)
     },
     afterLeave(el){
       console.log('after leave');
