@@ -4,7 +4,8 @@
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
-    <transition @before-enter="beforeEnter" 
+    <transition :css="false"
+    @before-enter="beforeEnter" 
     @enter="enter" 
     @after-enter="afterEnter"
     @before-leave="beforeLeave"
@@ -93,7 +94,7 @@ export default {
           clearInterval(this.leaveInterval);
           done();
         }
-      }, 60)
+      }, 20)
     },
     afterLeave(el){
       console.log('after leave');
