@@ -24,6 +24,7 @@ const store = createStore({
             }, 2000)
         },
         addTen(context, payload) {
+            console.log(context);
             context.commit('addTen', payload);
         }
     },
