@@ -2,21 +2,24 @@
   <base-container title="Vuex">
     <the-counter></the-counter>
     <button @click="addOne">Add 1</button>
+    <modify-counter></modify-counter>
   </base-container>
 </template>
 
 <script>
 import BaseContainer from './components/BaseContainer.vue';
 import theCounter from './components/theCounter.vue';
+import modifyCounter from './components/modifyCounter.vue';
 
 export default {
   components: {
     BaseContainer,
-    theCounter
+    theCounter,
+    modifyCounter
   },
   methods: {
     addOne() {
-      this.$store.state.counter++;
+      this.$store.commit('increment');
     }
   }
 };
