@@ -3,11 +3,10 @@ import { createStore } from 'vuex';
 /* one App can have only one store, but more than one state */
 import App from './App.vue';
 
-const store = createStore({
+const numberModule = {
     state() {
         return {
-            counter: 0,
-            isLoggedIn: false
+            counter: 0
         }
     },
     mutations: {
@@ -16,9 +15,6 @@ const store = createStore({
         },
         addTen(state, payload) {
             state.counter = state.counter + payload.value;
-        },
-        setAuth(state, payload) {
-            state.isLoggedIn = payload.isAuth;
         }
     },
     actions: {
@@ -28,14 +24,8 @@ const store = createStore({
             }, 2000)
         },
         addTen(context, payload) {
-            console.log(context); //You can see a dispatch object, you can dispatch a number of actions inside an action, this can be helpful if you sending an HTTP request, if succeeds, you wanna trigger a success action; if you get an error, you wanna trigger an error handling action. There is getters, state, etc.
+            console.log(context);
             context.commit('addTen', payload);
-        },
-        login(context) {
-            context.commit('setAuth', { isAuth: true })
-        },
-        logout(context) {
-            context.commit('setAuth', { isAuth: false })
         }
     },
     getters: {
@@ -51,7 +41,33 @@ const store = createStore({
                 return 100;
             }
             return finalCounter;
+        }
+    }
+}
+
+const store = createStore({
+    modules: {
+        numbers: numberModule
+    },
+    state() {
+        return {
+            isLoggedIn: false
+        }
+    },
+    mutations: {
+        setAuth(state, payload) {
+            state.isLoggedIn = payload.isAuth;
+        }
+    },
+    actions: {
+        login(context) {
+            context.commit('setAuth', { isAuth: true })
         },
+        logout(context) {
+            context.commit('setAuth', { isAuth: false })
+        }
+    },
+    getters: {
         userIsAuth(state) {
             return state.isLoggedIn;
         }
