@@ -63,10 +63,16 @@ input {
 
 .user-list-leave-active {
   transition: all 1s ease-in;
+  position: absolute;
 }
 
 .user-list-leave-to {
   opacity: 0;
   transform: translateX(30px);
+}
+
+/* this is a vue class that VUE add for other elements which are not entering or leaving */
+.user-list-move {
+  transition: transform 0.8s ease;
 }
 </style>
