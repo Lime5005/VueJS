@@ -6,7 +6,8 @@ import App from './App.vue';
 const store = createStore({
     state() {
         return {
-            counter: 0
+            counter: 0,
+            isLoggedIn: false
         }
     },
     mutations: {
@@ -15,6 +16,9 @@ const store = createStore({
         },
         addTen(state, payload) {
             state.counter = state.counter + payload.value;
+        },
+        setAuth(state, payload) {
+            state.isLoggedIn = payload.isAuth;
         }
     },
     actions: {
@@ -24,8 +28,14 @@ const store = createStore({
             }, 2000)
         },
         addTen(context, payload) {
-            console.log(context);
+            console.log(context); //You can see a dispatch object, you can dispatch a number of actions inside an action, this can be helpful if you sending an HTTP request, if succeeds, you wanna trigger a success action; if you get an error, you wanna trigger an error handling action. There is getters, state, etc.
             context.commit('addTen', payload);
+        },
+        login(context) {
+            context.commit('setAuth', { isAuth: true })
+        },
+        logout(context) {
+            context.commit('setAuth', { isAuth: false })
         }
     },
     getters: {
@@ -41,6 +51,9 @@ const store = createStore({
                 return 100;
             }
             return finalCounter;
+        },
+        userIsAuth(state) {
+            return state.isLoggedIn;
         }
     }
 })
