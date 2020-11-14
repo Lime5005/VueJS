@@ -1,9 +1,11 @@
 <template>
-  <ul>
+  <transition-group tag="ul" name="user-list">
     <li v-for="(user, index) in users" :key="user" @click="removeUser(index)">{{ user }}</li>
-  </ul>
-  <input type="text" ref="newUser">
-  <button @click="addUser">Add User</button>
+  </transition-group>
+  <div>
+    <input type="text" ref="newUser">
+    <button @click="addUser">Add User</button>
+  </div>
 </template>
 
 <script>
@@ -38,5 +40,33 @@ input {
   padding: 0.5rem;
   margin: 0.5rem;
   text-align: center;
+}
+
+.user-list-enter-from {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.user-list-enter-active {
+  transition: all 1s ease-out;
+}
+
+.user-list-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.user-list-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.user-list-leave-active {
+  transition: all 1s ease-in;
+}
+
+.user-list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
 }
 </style>
