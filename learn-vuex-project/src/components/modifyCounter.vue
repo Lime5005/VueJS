@@ -7,7 +7,11 @@ export default {
   methods: {
     addTen() {
       //this.$store.commit('addTen', {value: 10}); or:
-      this.$store.commit({
+/*       this.$store.commit({
+        type: 'addTen',
+        value: 10
+      }) */
+      this.$store.dispatch({
         type: 'addTen',
         value: 10
       })
