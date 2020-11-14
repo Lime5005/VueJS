@@ -16,6 +16,11 @@ const store = createStore({
         addTen(state, payload) {
             state.counter = state.counter + payload.value;
         }
+    },
+    getters: {
+        finalCounter(state) {
+            return state.counter * 5;
+        }
     }
 })
 

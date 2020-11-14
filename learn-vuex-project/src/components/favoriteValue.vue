@@ -1,5 +1,6 @@
 <template>
   <h3>{{ counter }}</h3>
+  <p>My favorite numbers....</p>
 </template>
 
 <script>
