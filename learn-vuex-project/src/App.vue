@@ -1,21 +1,18 @@
 <template>
   <base-container title="Vuex">
-    <h3>{{ counter }}</h3>
+    <the-counter></the-counter>
     <button @click="addOne">Add 1</button>
   </base-container>
 </template>
 
 <script>
 import BaseContainer from './components/BaseContainer.vue';
+import theCounter from './components/theCounter.vue';
 
 export default {
   components: {
     BaseContainer,
-  },
-  computed: {
-    counter() {
-      return this.$store.state.counter;
-    }
+    theCounter
   },
   methods: {
     addOne() {
