@@ -25,12 +25,26 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   //inject: ['isLoggedIn', 'login', 'logout', 'cart'],
   computed: {
     cartQty() {
       return this.$store.getters['cart/qty'];
+    },
+    isLoggedIn() {
+      return this.$store.getters.isAuth;
     }
+  },
+  methods: {
+    ...mapActions(['login', 'logout'])
+    // dispatch is for getters globally accessible:
+    // login() {
+    //   this.$store.dispatch('login');
+    // },
+    // logout() {
+    //   this.$store.dispatch('logout');
+    // }
   }
 };
 </script>
