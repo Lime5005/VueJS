@@ -43,7 +43,10 @@ export default {
     // We should not use mutations in components directly, so we need actions:
     actions: {
         addToShopcart(context, payload) {
-            context.commit('addProductToCart', payload);
+            const prodId = payload.id;
+            const products = context.rootGetters['prods/products'];
+            const product = products.find(prod => prod.id === prodId);
+            context.commit('addProductToCart', product);
         },
         removeFromShopcart(context, payload) {
             context.commit('removeProductFromCart', payload);
