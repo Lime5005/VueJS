@@ -18,7 +18,7 @@ export default {
 //         value: 10
 //       })
 //    }
-    ...mapActions(['increment', 'addTen'])
+    ...mapActions('numbers', ['increment', 'addTen'])
   }
 }
 </script>
