@@ -12,14 +12,14 @@ export default {
 }
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Sura&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 
 * {
   box-sizing: border-box;
 }
 
 html {
-  font-family: 'Sura', serif;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 body {

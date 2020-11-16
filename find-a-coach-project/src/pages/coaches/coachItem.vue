@@ -3,17 +3,23 @@
     <h3>{{ fullName }}</h3>
     <h4>${{ rate }}/hour</h4>
     <div>
-      <span v-for="area in areas" :key="area">{{ area }}</span>
+      <base-badge v-for="area in areas" 
+      :key="area" 
+      :jobtype="area"
+      :title="area"></base-badge>
     </div>
     <div class="actions">
-      <router-link :to="coachDetailLink">View details</router-link>
-      <router-link :to="contactCoachLink">Contact the coach</router-link>
+      <base-button mode="outline" link :to="coachDetailLink">View details</base-button>
+      <base-button link :to="contactCoachLink">Contact the coach</base-button>
     </div>
   </li>
 </template>
 
 <script>
+import BaseBadge from '../../components/ui/BaseBadge.vue';
+import BaseButton from '../../components/ui/BaseButton.vue';
 export default {
+  components: { BaseButton, BaseBadge },
   props: ['id', 'firstName', 'lastName', 'rate', 'areas'],
   computed: {
     fullName() {
