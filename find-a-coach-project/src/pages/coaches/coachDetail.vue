@@ -12,10 +12,10 @@
         <h2>Interested? Reach out now!</h2>
         <base-button link :to="contactLink">Contact</base-button>
       </header>
+    <!-- if there is a child route, you have to add the router-view on the parent -->
       <router-view></router-view>
     </base-card>
   </section>
-    <!-- if there is a child route, you have to add the router-view on the parent -->
   <section>
     <base-card>
       <base-badge v-for="area in areas" :key="area" :jobtype="area"  :title="area">
@@ -58,7 +58,3 @@ export default {
   },
 }
 </script>
-
-<style>
-
-</style>

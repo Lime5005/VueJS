@@ -1,6 +1,6 @@
 <template>
   <section>
-    Filter
+    <coach-filter @change-filter="setNewFilter"></coach-filter>
   </section>
   <section>
     <base-card>
@@ -30,19 +30,49 @@
 
 <script>
 import BaseButton from '../../components/ui/BaseButton.vue';
+import coachFilter from './coachFilter.vue';
 import coachItem from './coachItem.vue';
 
 export default {
   components: {
     coachItem,
-    BaseButton
+    BaseButton,
+    coachFilter
+  },
+  data() {
+    return {
+      activeFilters: {
+        frontend: true,
+        backend: true,
+        career: true
+      }
+    }
   },
   computed: {
     filteredCoaches() {
-      return this.$store.getters['coaches/coaches']
+      const coaches =  this.$store.getters['coaches/coaches']
+      return coaches.filter(coach => {
+        //array.filter returns a new array that matches the conditions, 只出现与选择的对应的coach: 同时满足选择，和有这个特长，（‘是非’选择）
+        if(this.activeFilters.frontend && coach.areas.includes('frontend')) {
+          return true
+        }
+        if(this.activeFilters.backend && coach.areas.includes('backend')) {
+          return true
+        }
+        if(this.activeFilters.career && coach.areas.includes('career')) {
+          return true
+        }
+        return false
+      })
     },
     hasCoaches() {
       return this.$store.getters['coaches/hasCoaches']
+    }
+  },
+  methods: {
+    setNewFilter(updatedFilters) {
+      //console.log('>>>>>>>>>>>>>><<<<');
+      this.activeFilters = updatedFilters;
     }
   }
 }

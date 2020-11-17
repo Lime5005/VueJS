@@ -26,7 +26,7 @@ export default {
                     id: 'c3',
                     firstName: 'Jolie',
                     lastName: 'Jones',
-                    areas: ['frontend', 'career'],
+                    areas: ['frontend'],
                     description: "I'm Jolie and I work for a big company.",
                     hourlyRate: 30
                 },
