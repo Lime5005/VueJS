@@ -76,7 +76,7 @@ export default {
       this[input].isValid = true
     },
     validateForm() {
-      //this.formIsValid = true;
+      this.formIsValid = true;//这个确保在重新输入时及时更新状态
       if(this.firstname.val === ''){
         this.firstname.isValid = false
         this.formIsValid = false
