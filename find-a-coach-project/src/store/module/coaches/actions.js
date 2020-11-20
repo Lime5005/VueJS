@@ -26,6 +26,9 @@ export default {
         })
     },
     async loadCoaches(context) {
+        if (!context.getters.shouldUpdate) {
+            return
+        }
         //what we fetched here is a big object data: 
         const response = await fetch(`https://vue-http-project-960b4.firebaseio.com/coaches/.json`)
         const responseData = await response.json()
@@ -50,5 +53,7 @@ export default {
         }
 
         context.commit('setCoachesFromFirebase', coaches)
+
+        context.commit('setFetchTimeStamp')
     }
 }
