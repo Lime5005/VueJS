@@ -24,5 +24,30 @@ export default {
             ...coachData, //copy all the coachData
             id: userId
         })
+    },
+    async loadCoaches(context) {
+        //what we fetched here is a big object data: 
+        const response = await fetch(`https://vue-http-project-960b4.firebaseio.com/coaches/.json`)
+        const responseData = await response.json()
+
+        if (!response.ok) {
+            //
+        }
+        // transferm the data into an array:
+
+        const coaches = []
+        for (const idKey in responseData) {
+            const coach = {
+                id: idKey, //'c4' in firebase
+                firstName: responseData[idKey].firstName,
+                lastName: responseData[idKey].lastName,
+                description: responseData[idKey].description,
+                hourlyRate: responseData[idKey].hourlyRate,
+                areas: responseData[idKey].areas
+            }
+            coaches.push(coach)
+        }
+
+        context.commit('setCoachesFromFirebase', coaches)
     }
 }
