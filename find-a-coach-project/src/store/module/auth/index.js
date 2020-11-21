@@ -6,7 +6,9 @@ export default {
     state() {
         return {
             //here is the rootState, the userId is for coach:
-            userId: 'c4'
+            userId: null,
+            token: null,
+            tokenExpiration: null
         }
     },
     mutations,

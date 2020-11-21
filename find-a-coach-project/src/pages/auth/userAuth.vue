@@ -49,6 +49,14 @@ export default {
         return
       }
       //send http request
+      if(this.mode === 'login') {
+        //
+      } else {
+        this.$store.dispatch('signup', {
+          email: this.email,
+          password: this.password
+        })//The auth module is not namespaced.
+      }
     },
     swithAuthMode() {
       if(this.mode === 'login'){
