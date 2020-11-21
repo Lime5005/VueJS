@@ -9,6 +9,8 @@ import reqReceived from './pages/requests/reqReceived.vue';
 
 import NotFound from './pages/NotFound.vue';
 
+import userAuth from './pages/auth/userAuth.vue';
+
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -24,6 +26,7 @@ const router = createRouter({
         },
         { path: '/register', component: registration },
         { path: '/requests', component: reqReceived },
+        { path: '/auth', component: userAuth },
         { path: '/:notFound(.*)', component: NotFound },
 
     ]
