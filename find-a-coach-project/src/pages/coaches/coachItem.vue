@@ -60,6 +60,6 @@ div {
 
 .actions {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 </style>
