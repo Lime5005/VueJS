@@ -62,17 +62,19 @@ export default {
       this.isLoading = true
       //send http request
 
-      try {
-        if(this.mode === 'login') {
-          //
-        } else {
-          await this.$store.dispatch('signup', {
+      const payloadData = {
             email: this.email,
             password: this.password
-          })//The auth module is not namespaced.
+      }
+
+      try {
+        if(this.mode === 'login') {
+          await this.$store.dispatch('login', payloadData)
+        } else {
+          await this.$store.dispatch('signup', payloadData)//The auth module is not namespaced.
         }
       } catch(err) {
-        this.error = err.message || 'Failed to Sign-Up, try again later'
+        this.error = err.message || 'Failed to Sign-Up, try again later.'
       }
 
       this.isLoading = false
