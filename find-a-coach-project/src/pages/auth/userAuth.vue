@@ -73,7 +73,8 @@ export default {
         } else {
           await this.$store.dispatch('signup', payloadData)//The auth module is not namespaced.
         }
-        this.$router.replace('/coaches')
+        const redirectUrl = '/' + (this.$route.query.redirect || 'coaches')
+        this.$router.replace(redirectUrl)
       } catch(err) {
         this.error = err.message || 'Failed to Sign-Up, try again later.'
       }
