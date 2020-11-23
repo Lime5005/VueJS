@@ -52,7 +52,7 @@ export default {
         // set a timer whenever the user is loggedin, so we can log him out when the timer expires, (trigger the timer wherever we want!)
 
         timer = setTimeout(function() {
-            context.dispatch('logout')
+            context.dispatch('redirAfterLogout')
         }, expiresIn)
 
         context.commit('setUser', {
@@ -73,7 +73,7 @@ export default {
         }
 
         timer = setTimeout(function() {
-            context.dispatch('logout')
+            context.dispatch('redirAfterLogout')
         }, expiresIn)
 
         if (token && userId) {
@@ -93,5 +93,9 @@ export default {
             token: null,
             userId: null
         })
+    },
+    redirAfterLogout(context) {
+        context.dispatch('logout')
+        context.commit('autoLogoutRedir')
     }
 }

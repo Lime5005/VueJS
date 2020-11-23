@@ -7,5 +7,8 @@ export default {
     },
     isAuthenticated(state) {
         return !!state.token; // return a true Boolean
+    },
+    redirectLogout(state) {
+        return state.redirectLogout
     }
 }

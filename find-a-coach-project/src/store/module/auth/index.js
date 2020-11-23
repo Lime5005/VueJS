@@ -8,7 +8,7 @@ export default {
             //here is the rootState, the userId is for coach:
             userId: null,
             token: null,
-            tokenExpiration: null
+            redirectLogout: false
         }
     },
     mutations,

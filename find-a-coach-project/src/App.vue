@@ -13,8 +13,21 @@ export default {
   components: {
     Navigation
   },
+  computed: {
+    redirectLogout() {
+      return this.$store.getters.redirectLogout
+    }
+  },
   created() {
     this.$store.dispatch('stayLogin')
+  },
+  watch: {
+    redirectLogout(curVal, oldVal) {
+      //did change and is now true
+      if(curVal && curVal !== oldVal) {
+        this.$router.replace('/coaches')
+      }
+    }
   }
 }
 </script>
