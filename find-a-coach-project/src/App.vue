@@ -12,6 +12,9 @@ import Navigation from './components/layout/Navigation'
 export default {
   components: {
     Navigation
+  },
+  created() {
+    this.$store.dispatch('stayLogin')
   }
 }
 </script>
