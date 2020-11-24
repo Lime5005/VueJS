@@ -1,7 +1,7 @@
 <template>
   <h2>My course Goal</h2>
 
-  <h3>{{ goalAndYear.goal}}</h3>
+  <h3 v-if="goalAndYear.goalIsVisible">{{ goalAndYear.goal}}</h3>
   <h3>{{ goalAndYear.year }}</h3>
 
   <button @click="showGoal">Toggle Goal</button>
@@ -17,6 +17,7 @@ export default {
     //const goal = ref('Find a job in IT')
     const goalAndYear = reactive({
       goal: 'Find a job in IT',
+      goalIsVisible: false,
       year: 2020
     })
 /*     function showGoal(){
@@ -27,18 +28,23 @@ export default {
       }
     } */
   function showGoal() {
-    if(goalAndYear.goal !== '') {
+    goalAndYear.goalIsVisible = !goalAndYear.goalIsVisible
+/*     if(goalAndYear.goal !== '') {
       goalAndYear.goal = ''
     } else {
       goalAndYear.goal = 'Find a job in IT'
-    }
+    } */
   }
 
   function growYear() {
     goalAndYear.year ++ 
   }
 
-    return {goalAndYear: goalAndYear, showGoal: showGoal, growYear: growYear}
+    return {
+      goalAndYear, 
+      showGoal, 
+      growYear
+      }
   }
 }
 </script>
