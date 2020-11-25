@@ -5,13 +5,15 @@
   <h3>{{ goalAndYear.year }}</h3>
 
   <button @click="showGoal">Toggle Goal</button>
-
-  
   <button @click="growYear">Year for next year</button>
+  <h4>{{ userName }}</h4>
+  <input type="text" v-model="firstName">
+  <input type="text" v-model="lastName">
+
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 export default {
   setup() {
     //const goal = ref('Find a job in IT')
@@ -19,6 +21,11 @@ export default {
       goal: 'Find a job in IT',
       goalIsVisible: false,
       year: 2020
+    })
+    const firstName = ref('')
+    const lastName = ref('')
+    const userName = computed(function() {
+      return firstName.value + ' ' + lastName.value
     })
 /*     function showGoal(){
       if(goal.value !== '') {
@@ -43,7 +50,10 @@ export default {
     return {
       goalAndYear, 
       showGoal, 
-      growYear
+      growYear,
+      firstName,
+      lastName,
+      userName
       }
   }
 }
