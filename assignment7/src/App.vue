@@ -7,7 +7,7 @@
   <button @click="showGoal">Toggle Goal</button>
   <br>
   <button @click="growYear">Year for next year</button>
-  <h4>{{ userName }}</h4>
+  <user-list :first-name="firstName" :last-name="lastName" ></user-list>
   <h3>{{ nickName }}</h3>
   <input type="text" placeholder="First Name" v-model="firstName">
   <input type="text" placeholder="Last Name"
@@ -17,12 +17,15 @@
   ref="nicknameInput">
   <br>
   <button @click="changeNickname">Change</button>
-
 </template>
 
 <script>
+import userList from './components/userList.vue'
 import { ref, reactive, computed, watch } from 'vue'
 export default {
+  components: {
+    userList
+  },
   setup() {
     //const goal = ref('Find a job in IT')
     const goalAndYear = reactive({
