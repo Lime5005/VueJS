@@ -9,12 +9,14 @@
   <button @click="growYear">Year for next year</button>
   <h4>{{ userName }}</h4>
   <h3>{{ nickName }}</h3>
-  <input type="text" v-model="firstName">
+  <input type="text" placeholder="First Name" v-model="firstName">
+  <input type="text" placeholder="Last Name"
+  v-model="lastName">
   <br>
-  <input type="text" v-model="lastName">
+  <input type="text" placeholder="Nick Name"
+  ref="nicknameInput">
   <br>
-  <input type="text" ref="nicknameInput">
-  <button @click="changeNickname"></button>
+  <button @click="changeNickname">Change</button>
 
 </template>
 
@@ -89,5 +91,18 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+button {
+  background-color: #0f0280; /* Green */
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  color: white;
+  padding: 15px 20px;
+  margin: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
 </style>
