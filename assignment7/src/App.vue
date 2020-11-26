@@ -1,137 +1,93 @@
 <template>
-  <header>
-    <h1>Expense Tracker</h1>
-  </header>
-  <section>
-    <div>Available Funds: {{ totalFunds }}</div>
-    <div>Total Expenses: {{ currentExpenses }}</div>
-    <hr />
-    <div>Funds left: {{ remainingFunds }}</div>
-  </section>
-  <section>
-    <form @submit.prevent="addExpense">
-      <div>
-        <label for="amount">Amount</label>
-        <input id="amount" type="number" v-model.number="enteredExpense" />
-      </div>
-      <button>Add Expense</button>
-    </form>
-  </section>
+  <h2>My course Goal</h2>
+
+  <h3 v-if="goalAndYear.goalIsVisible">{{ goalAndYear.goal}}</h3>
+  <h3>{{ goalAndYear.year }}</h3>
+
+  <button @click="showGoal">Toggle Goal</button>
+  <br>
+  <button @click="growYear">Year for next year</button>
+  <h4>{{ userName }}</h4>
+  <h3>{{ nickName }}</h3>
+  <input type="text" v-model="firstName">
+  <br>
+  <input type="text" v-model="lastName">
+  <br>
+  <input type="text" ref="nicknameInput">
+  <button @click="changeNickname"></button>
+
 </template>
 
 <script>
-import {ref, computed, watch} from 'vue'
+import { ref, reactive, computed, watch } from 'vue'
 export default {
   setup() {
-    const totalFunds = 100
-    const currentExpenses = ref(0)
-    const enteredExpense = ref(0)
-
-    const remainingFunds = computed(() => {
-      return totalFunds - currentExpenses.value
+    //const goal = ref('Find a job in IT')
+    const goalAndYear = reactive({
+      goal: 'Find a job in IT',
+      goalIsVisible: false,
+      year: 2020
     })
-
-    watch(remainingFunds, function(val) {
-      if(val < 0 ) {
-        alert('You are broke!')
-      }
+    const firstName = ref('')
+    const lastName = ref('')
+    const nickName = ref('')
+    const nicknameInput = ref(null)
+    const userName = computed(function() {
+      return firstName.value + ' ' + lastName.value
     })
-
-/*     watch(currentExpenses, function(val) {
-      if (val === 100) {
-        alert('You are broke!');
+/*     function showGoal(){
+      if(goal.value !== '') {
+        goal.value = ''
+      } else {
+        goal.value = 'Find a job in IT'
       }
-    }) */
-
-    function addExpense() {
-      console.log('add');
-       currentExpenses.value += enteredExpense.value
-    }
-
-    return {
-      totalFunds,
-      currentExpenses,
-      enteredExpense,
-      remainingFunds,
-      addExpense
-    }
+    } */
+  watch(firstName, function(oldVal, newVal) {
+    console.log('old ' + newVal);
+    console.log('new ' + oldVal);
+  })
+  watch(goalAndYear, function(val) {
+    console.log(val.year)
+  })
+  function showGoal() {
+    goalAndYear.goalIsVisible = !goalAndYear.goalIsVisible
+/*     if(goalAndYear.goal !== '') {
+      goalAndYear.goal = ''
+    } else {
+      goalAndYear.goal = 'Find a job in IT'
+    } */
   }
-/*   data() {
+
+  function growYear() {
+    goalAndYear.year ++ 
+  }
+
+  function changeNickname() {
+    nickName.value = nicknameInput.value.value
+  }
+
     return {
-      availableFunds: 100,
-      currentExpenses: 0,
-      enteredExpense: 0,
-    };
-  },
-  computed: {
-    remainingFunds() {
-      return this.availableFunds - this.currentExpenses;
-    },
-  },
-  methods: {
-    addExpense() {
-      this.currentExpenses += this.enteredExpense;
-    },
-  },
-  watch: {
-    remainingFunds(val) {
-      if (val < 0) {
-        alert('You are broke!');
+      goalAndYear, 
+      showGoal, 
+      growYear,
+      firstName,
+      lastName,
+      userName,
+      nickName,
+      nicknameInput,
+      changeNickname
       }
-    },
-  }, */
-};
+  }
+}
 </script>
 
 <style>
-* {
-  box-sizing: border-box;
-}
-html {
-  font-family: sans-serif;
-}
-body {
-  margin: 0;
-}
-header {
-  width: 100%;
-  height: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #30006e;
-  color: white;
-}
-section {
-  margin: 2rem auto;
-  max-width: 35rem;
-  padding: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  border-radius: 12px;
-}
-
-form div {
-  margin: 1rem 0;
-}
-input {
-  width: 100%;
-  padding: 0.15rem;
-}
-label {
-  font-weight: bold;
-  margin: 0.5rem 0;
-}
-button {
-  background-color: #30006e;
-  border: 1px solid #30006e;
-  font: inherit;
-  cursor: pointer;
-  padding: 0.5rem 1.5rem;
-  color: white;
-}
-button:hover,
-button:active {
-  background-color: #5819ac;
-  border-color: #5819ac;
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>
