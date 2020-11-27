@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { ref, computed, watch } from 'vue'
 import UserItem from './UserItem.vue';
 
 export default {
@@ -26,14 +27,76 @@ export default {
     UserItem,
   },
   props: ['users'],
-  data() {
+  setup(props) {
+    const enteredSearchTerm = ref('')
+    const activeSearchTerm = ref('')
+
+    const availableUsers = computed(() => {
+      let users = [];
+      if (activeSearchTerm.value) {
+        users = props.users.filter((usr) =>
+          usr.fullName.includes(activeSearchTerm.value)
+        );
+      } else if (props.users) {
+        users = props.users;
+      }
+      return users;   
+    })
+
+    // to not allow update the search logic on every keystrock 不是每次击键就更新，而是击键停止3秒后开始搜寻
+    watch(enteredSearchTerm, function(val) {
+      setTimeout(() => {
+        if (val === enteredSearchTerm.value) {
+          activeSearchTerm.value = val;
+        }
+      }, 300);
+    })
+
+    function updateSearch(val) {
+      enteredSearchTerm.value = val;
+    }
+    const sorting = ref(null)
+
+    const displayedUsers = computed(() => {
+      if (!sorting.value) {
+        // computed properties are just refs:
+        return availableUsers.value;
+      }
+      return availableUsers.value.slice().sort((u1, u2) => {
+        if (sorting.value === 'asc' && u1.fullName > u2.fullName) {
+          return 1;
+        } else if (sorting.value === 'asc') {
+          return -1;
+        } else if (sorting.value === 'desc' && u1.fullName > u2.fullName) {
+          return -1;
+        } else {
+          return 1;
+        }
+      })
+    })
+
+    function sort(mode) {
+      sorting.value = mode;
+    }
+
+    return {
+      enteredSearchTerm,
+      activeSearchTerm,
+      sorting,
+      availableUsers,
+      displayedUsers,
+      updateSearch,
+      sort
+    }
+  },
+/*   data() {
     return {
       enteredSearchTerm: '',
       activeSearchTerm: '',
       sorting: null,
     };
-  },
-  computed: {
+  }, */
+/*   computed: {
     availableUsers() {
       let users = [];
       if (this.activeSearchTerm) {
@@ -61,16 +124,16 @@ export default {
         }
       });
     },
-  },
-  methods: {
+  }, */
+/*   methods: {
     updateSearch(val) {
       this.enteredSearchTerm = val;
     },
     sort(mode) {
       this.sorting = mode;
     },
-  },
-  watch: {
+  }, */
+/*   watch: {
     enteredSearchTerm(val) {
       setTimeout(() => {
         if (val === this.enteredSearchTerm) {
@@ -78,7 +141,7 @@ export default {
         }
       }, 300);
     }
-  },
+  }, */
 };
 </script>
 
