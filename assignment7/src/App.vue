@@ -21,7 +21,7 @@
 
 <script>
 import userList from './components/userList.vue'
-import { ref, reactive, computed, watch } from 'vue'
+import { ref, reactive, computed, provide, watch} from 'vue'
 export default {
   components: {
     userList
@@ -40,6 +40,10 @@ export default {
     const userName = computed(function() {
       return firstName.value + ' ' + lastName.value
     })
+
+    const uAge = ref(31)
+
+    provide('userAge', uAge)
 /*     function showGoal(){
       if(goal.value !== '') {
         goal.value = ''
