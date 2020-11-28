@@ -26,6 +26,7 @@ export default {
   components: {
     UserItem,
   },
+  emits: ['list-projects'],
   props: ['users'],
   setup(props) {
     const enteredSearchTerm = ref('')

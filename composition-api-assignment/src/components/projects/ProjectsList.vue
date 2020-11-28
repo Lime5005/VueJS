@@ -13,14 +13,56 @@
 </template>
 
 <script>
+import { ref, computed, watch } from 'vue'
 import ProjectItem from './ProjectItem.vue';
 
 export default {
   components: {
     ProjectItem,
   },
-  props: ['user'],
-  data() {
+  props: ['user'], //如果有多个props, 用toRefs转换一下
+  setup(props) {
+    const enteredSearchTerm = ref('')
+    const activeSearchTerm = ref('')
+
+    const hasProjects = computed(() => {
+      return props.user.projects && availableProjects.value.length > 0;
+    })
+
+    const availableProjects = computed(() => {
+      if (activeSearchTerm.value) {
+        return props.user.projects.filter((prj) =>
+          prj.title.includes(activeSearchTerm.value)
+        );
+      }
+      return props.user.projects  
+    })
+
+    function updateSearch(val) {
+      enteredSearchTerm.value = val
+    }
+
+    watch(enteredSearchTerm, (val) => {
+      setTimeout(() => {
+        if (val === enteredSearchTerm.value) {
+          activeSearchTerm.value = val
+        }
+      }, 300)    
+    })
+    // watch (user), with const {user} = toRefs(props)
+    watch(props, () => {
+      enteredSearchTerm.value = ''
+    })
+
+    return {
+      enteredSearchTerm,
+      activeSearchTerm,
+      hasProjects,
+      availableProjects,
+      updateSearch
+    }
+  }
+/*   data() {
     return {
       enteredSearchTerm: '',
       activeSearchTerm: '',
@@ -55,7 +97,7 @@ export default {
     user() {
       this.enteredSearchTerm = '';
     },
-  },
+  }, */
 };
 </script>
 
