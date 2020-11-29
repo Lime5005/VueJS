@@ -19,9 +19,10 @@
 </template>
 
 <script>
-import { ref, computed, toRefs } from 'vue'
+import { toRefs } from 'vue'
 import UserItem from './UserItem.vue';
 import useSearch from '../../hooks/search.js'
+import useSort from '../../hooks/sort.js'
 export default {
   components: {
     UserItem,
@@ -65,7 +66,12 @@ export default {
       enteredSearchTerm.value = val;
     } */
 
-    const sorting = ref(null)
+    const { 
+        sorting,
+        displayedUsers,
+        sort
+    } = useSort(availableItems, 'fullName')
+/*     const sorting = ref(null)
 
     const displayedUsers = computed(() => {
       if (!sorting.value) {
@@ -87,7 +93,7 @@ export default {
 
     function sort(mode) {
       sorting.value = mode;
-    }
+    } */
 
     return {
       enteredSearchTerm,
