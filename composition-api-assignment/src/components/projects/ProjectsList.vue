@@ -13,23 +13,36 @@
 </template>
 
 <script>
-import { ref, computed, watch } from 'vue'
+import { computed, watch, toRefs } from 'vue'
 import ProjectItem from './ProjectItem.vue';
-
+import useSearch from '../../hooks/search.js'
 export default {
   components: {
     ProjectItem,
   },
   props: ['user'], //如果有多个props, 用toRefs转换一下
   setup(props) {
-    const enteredSearchTerm = ref('')
-    const activeSearchTerm = ref('')
+/*     const enteredSearchTerm = ref('')
+    const activeSearchTerm = ref('') */
+    const { user } = toRefs(props) //user is a ref now
 
-    const hasProjects = computed(() => {
-      return props.user.projects && availableProjects.value.length > 0;
+    //here we use computed 是因为setup只跑一次，用computed可以观察变化继续跑
+    const projects = computed(() => {
+      return user.value ? user.value.projects : []
     })
 
-    const availableProjects = computed(() => {
+    const {
+      enteredSearchTerm,
+      availableItems,
+      updateSearch
+    } = useSearch(projects, 'title')
+
+    const hasProjects = computed(() => {
+      //这里可以直接用user也是因为user已经转换成了value在search.js里
+      return props.user.projects && availableItems.value.length > 0;
+    })
+
+/*   const availableProjects = computed(() => {
       if (activeSearchTerm.value) {
         return props.user.projects.filter((prj) =>
           prj.title.includes(activeSearchTerm.value)
@@ -38,7 +51,7 @@ export default {
       return props.user.projects  
     })
 
-    function updateSearch(val) {
+     function updateSearch(val) {
       enteredSearchTerm.value = val
     }
 
@@ -48,7 +61,7 @@ export default {
           activeSearchTerm.value = val
         }
       }, 300)    
-    })
+    }) */
     // watch (user), with const {user} = toRefs(props)
     watch(props, () => {
       enteredSearchTerm.value = ''
@@ -56,9 +69,8 @@ export default {
 
     return {
       enteredSearchTerm,
-      activeSearchTerm,
       hasProjects,
-      availableProjects,
+      availableProjects: availableItems,
       updateSearch
     }
   }

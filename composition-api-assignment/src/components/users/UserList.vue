@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, toRefs } from 'vue'
 import UserItem from './UserItem.vue';
-
+import useSearch from '../../hooks/search.js'
 export default {
   components: {
     UserItem,
@@ -29,7 +29,15 @@ export default {
   emits: ['list-projects'],
   props: ['users'],
   setup(props) {
-    const enteredSearchTerm = ref('')
+    const { users } = toRefs(props)
+
+    const {
+        enteredSearchTerm,//a ref
+        availableItems, // computed property
+        updateSearch // a function
+    } = useSearch(users, 'fullName')//search.js里已经确认了items会是一个ref,因为用的是items.value，所以这里直接用users
+
+/*     const enteredSearchTerm = ref('')
     const activeSearchTerm = ref('')
 
     const availableUsers = computed(() => {
@@ -42,10 +50,10 @@ export default {
         users = props.users;
       }
       return users;   
-    })
+    }) */
 
     // to not allow update the search logic on every keystrock 不是每次击键就更新，而是击键停止3秒后开始搜寻
-    watch(enteredSearchTerm, function(val) {
+/*     watch(enteredSearchTerm, function(val) {
       setTimeout(() => {
         if (val === enteredSearchTerm.value) {
           activeSearchTerm.value = val;
@@ -55,15 +63,16 @@ export default {
 
     function updateSearch(val) {
       enteredSearchTerm.value = val;
-    }
+    } */
+
     const sorting = ref(null)
 
     const displayedUsers = computed(() => {
       if (!sorting.value) {
         // computed properties are just refs:
-        return availableUsers.value;
+        return availableItems.value;
       }
-      return availableUsers.value.slice().sort((u1, u2) => {
+      return availableItems.value.slice().sort((u1, u2) => {
         if (sorting.value === 'asc' && u1.fullName > u2.fullName) {
           return 1;
         } else if (sorting.value === 'asc') {
@@ -82,9 +91,8 @@ export default {
 
     return {
       enteredSearchTerm,
-      activeSearchTerm,
       sorting,
-      availableUsers,
+      availableItems,
       displayedUsers,
       updateSearch,
       sort
