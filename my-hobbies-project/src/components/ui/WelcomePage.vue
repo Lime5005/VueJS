@@ -1,6 +1,8 @@
 <template>
   <section>
-    <h3>Welcome!</h3>
+    <base-card>
+      <h3>Welcome!</h3>
+    </base-card>
   </section>
 </template>
 

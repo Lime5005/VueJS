@@ -75,6 +75,7 @@ header a {
   display: inline-block;
   padding: 0.75rem 1.5rem;
   border: 1px solid transparent;
+  margin: 0 1rem;
 }
 
 </style>

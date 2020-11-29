@@ -1,6 +1,12 @@
+import { defineAsyncComponent } from 'vue'
+
 import { createRouter, createWebHistory } from 'vue-router'
+
+const Categories = defineAsyncComponent(() =>
+    import ('./components/hobbies/Categories'))
+
 import WelcomePage from './components/ui/WelcomePage.vue'
-import Categories from './components/hobbies/Categories'
+
 import HobbiesList from './components/hobbies/HobbiesList'
 
 const router = createRouter({
