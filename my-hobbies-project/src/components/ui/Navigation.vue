@@ -2,17 +2,17 @@
   <header>
     <nav>
       <h1><router-link to="/">MyHobbies</router-link></h1>
-      <ul>
-        <li><router-link to="/categories">Categories</router-link></li>
-        <li><router-link to="/categories/1/hobbies">Hobbies</router-link></li>
-      </ul>
-
+      <categories-list></categories-list>
     </nav>
   </header>
 </template>
 
 <script>
+import CategoriesList from '../hobbies/CategoriesList'
 export default {
+  components: {
+    CategoriesList
+  }
 }
 </script>
 
