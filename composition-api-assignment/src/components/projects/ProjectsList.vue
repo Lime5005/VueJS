@@ -39,7 +39,7 @@ export default {
 
     const hasProjects = computed(() => {
       //这里可以直接用user也是因为user已经转换成了value在search.js里
-      return props.user.projects && availableItems.value.length > 0;
+      return user.value.projects && availableItems.value.length > 0;
     })
 
 /*   const availableProjects = computed(() => {
@@ -63,8 +63,11 @@ export default {
       }, 300)    
     }) */
     // watch (user), with const {user} = toRefs(props)
-    watch(props, () => {
+/*     watch(props, () => {
       enteredSearchTerm.value = ''
+    }) */
+    watch(user, () => {
+      updateSearch('')
     })
 
     return {
