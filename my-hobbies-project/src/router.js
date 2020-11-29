@@ -12,8 +12,9 @@ const router = createRouter({
     routes: [
         { path: '/', component: WelcomePage },
         {
-            path: '/categories/:id/hobbies',
-            component: HobbiesList
+            path: '/categories/:id',
+            component: HobbiesList,
+            props: true
         }
     ]
 

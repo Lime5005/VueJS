@@ -1,6 +1,6 @@
 <template>
   <div>
-      <a v-for="category in categories" :key="category" :href="`/categories/${category.id}/hobbies`">
+      <a v-for="category in categories" :key="category" :href="`/categories/${category.id}`">
       {{ category.icon }} {{ category.name }}
       </a>
   </div>
