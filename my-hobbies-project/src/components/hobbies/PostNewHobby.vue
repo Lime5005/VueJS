@@ -57,8 +57,9 @@ export default {
   },
   methods: {
     postNewHobby() {
-      console.log('ok');
-      console.log(this.formData);
+      // console.log('ok');
+      // console.log(this.formData);
+      this.$store.dispatch('addHobby', this.formData)
     }
   }
 
