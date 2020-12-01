@@ -19,6 +19,9 @@ const store = createStore({
     mutations: {
         postNewHobby(state, payload) {
             state.hobbies.push(payload)
+        },
+        setHobbies(state, payload) {
+            state.hobbies = payload
         }
     },
     actions: {
@@ -31,6 +34,11 @@ const store = createStore({
                 rating: data.rating
             }
             context.commit('postNewHobby', newHobby)
+        },
+        filteredHobbies(context, getters, route) {
+            const hobbies = getters.state.hobbies
+            const sortedHobbies = hobbies.filter(hobby => hobby.categoryId === route)
+            context.commit('setHobbies', sortedHobbies)
         }
     },
     getters: {

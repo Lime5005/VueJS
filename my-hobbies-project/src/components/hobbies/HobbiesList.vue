@@ -24,16 +24,18 @@ export default {
   },
   created() {
     console.log(this.id);
-    console.log(this.$store.getters.hobbies);
-    const allHobbies = this.$store.getters.hobbies
-    this.hobbies =  allHobbies.filter( hobby => hobby.categoryId === this.id)
-/*     this.hobbies = this.$store.getters.hobbies.filter(hobby => hobby.categoryId === this.id)  */  
+    console.log(this.$store.getters.hobbies[0]);
   },
   computed: {
     hobbies() {
-      return this.$store.getters.hobbies
+      return this.$store.getters.hobbies//.filter(hobby => hobby.categoryId === this.id)
     }
-  }
+  },
+  watch: {
+    $route () {
+     this.$store.dispatch('filtedHobbies', this.$route.params.id)
+   }
+}
 }
 </script>
 
