@@ -42,13 +42,13 @@
 
 <script>
 export default {
-  props: ['id'],
+  props: ['id', 'categoryId'],
   data() {
     return {
         error: null,
         show: false,
         formData: {
-            categoryId: this.$props.id ?? null,
+            categoryId: this.id ?? null,
             title: '',
             description: '',
             rating: null

@@ -36,7 +36,7 @@ const store = createStore({
             context.commit('postNewHobby', newHobby)
         },
         filteredHobbies(context, getters, route) {
-            const hobbies = getters.state.hobbies
+            const hobbies = getters.hobbies
             const sortedHobbies = hobbies.filter(hobby => hobby.categoryId === route)
             context.commit('setHobbies', sortedHobbies)
         }
@@ -47,6 +47,9 @@ const store = createStore({
         },
         hobbies(state) {
             return state.hobbies
+        },
+        getCategory(state, id) {
+            return state.categories.find(el => el.id === id)
         }
     }
 })

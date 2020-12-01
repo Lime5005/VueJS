@@ -1,13 +1,9 @@
 <template>
   <div>
     <base-card>
-      <h1>Hobbies List</h1>
-        <ul v-for="hobby in hobbies" :key="hobby.id">
-          <li>{{hobby.categoryId}}</li>
-          <li>{{hobby.title}}</li>
-          <li>{{hobby.description}}</li>
-          <li>{{hobby.rating}}</li>
-        </ul>
+      <h1>Hobbies List</h1>   
+      <hobbies-item  v-for="hobby in hobbies" :key="hobby.id"
+      :hobby="hobby"></hobbies-item>
     </base-card>
     <base-card>
       <post-new-hobby></post-new-hobby>
@@ -16,15 +12,18 @@
 </template>
 
 <script>
+import HobbiesItem from './HobbiesItem.vue';
 import PostNewHobby from './PostNewHobby.vue'
 export default {
   props: ['id'],
   components: {
-    PostNewHobby
+    PostNewHobby,
+    HobbiesItem
   },
   created() {
     console.log(this.id);
     console.log(this.$store.getters.hobbies[0]);
+    //this.$store.dispatch('filteredHobbies', this.id)
   },
   computed: {
     hobbies() {
@@ -33,7 +32,7 @@ export default {
   },
   watch: {
     $route () {
-     this.$store.dispatch('filtedHobbies', this.$route.params.id)
+     this.$store.dispatch('filteredHobbies', this.$route.params.id)
    }
 }
 }
