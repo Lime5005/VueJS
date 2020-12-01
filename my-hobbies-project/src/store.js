@@ -10,7 +10,10 @@ const store = createStore({
                 { id: 4, name: 'Reading', icon: '📖' },
                 { id: 5, name: 'Gaming', icon: '🎮' }
             ],
-            hobbies: []
+            hobbies: [
+                { id: '1', categoryId: 1, title: 'travel around the world', description: 'so much fun!', rating: 10 },
+                { id: '2', categoryId: 2, title: 'French love song', description: 'so good!', rating: 10 }
+            ]
         }
     },
     mutations: {
